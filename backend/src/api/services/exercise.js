@@ -2,7 +2,7 @@ import Exercise from '../models/Exercise.js';
 
 const create = ({ exercise }) => Exercise.create(exercise);
 
-const list = ({ filters = {} }) => Exercise.find(filters);
+const list = ({ filters = {} } = {}) => Exercise.find(filters);
 
 const show = ({ id }) => Exercise.findById(id);
 

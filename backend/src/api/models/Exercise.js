@@ -1,41 +1,17 @@
 import mongoose from 'mongoose';
 import { requiredArray } from '../utils/index.js';
-
-const ImageSchema = new mongoose.Schema({
-	description: {
-		type: String,
-		required: true
-	},
-	cloudId: {
-		type: String,
-		required: true
-	}
-});
-
-const OptionSchema = new mongoose.Schema({
-	text: String,
-	correctAnswer: {
-		type: Boolean,
-		required: true
-	},
-	image: ImageSchema
-});
-
-const ReferenceSchema = new mongoose.Schema({
-	text: String,
-	author: String,
-	source: String,
-	image: ImageSchema
-});
+import ImageSchema from '../schemas/Image.js';
 
 const ExerciseSchema = new mongoose.Schema({
-	year: {
-		type: Number,
-		required: true
-	},
-	stage: {
-		type: Number,
-		required: true
+	exam: {
+		year: {
+			type: Number,
+			required: true
+		},
+		stage: {
+			type: Number,
+			required: true
+		}
 	},
 	question: {
 		type: String,
@@ -50,12 +26,26 @@ const ExerciseSchema = new mongoose.Schema({
 		validate: requiredArray
 	},
 	options: {
-		type: [OptionSchema],
+		type: [
+			{
+				text: String,
+				correctAnswer: {
+					type: Boolean,
+					required: true
+				},
+				image: ImageSchema
+			}
+		],
 		validate: requiredArray
 	},
-	references: {
-		type: [ReferenceSchema]
-	}
+	references: [
+		{
+			text: String,
+			author: String,
+			source: String,
+			image: ImageSchema
+		}
+	]
 });
 
 const Exercise = mongoose.model('Exercise', ExerciseSchema);
