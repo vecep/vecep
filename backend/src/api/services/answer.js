@@ -1,0 +1,22 @@
+import Answer from '../models/Answer.js';
+
+const create = ({ answer }) => Answer.create(answer);
+
+const list = ({ filters = {} } = {}) => Answer.find(filters).populate(['user', 'exercise']);
+
+const show = ({ id }) => Answer.findById(id);
+
+const update = ({ id, answer }) => Answer.findByIdAndUpdate(id, answer, { new: true });
+
+const destroy = ({ id }) => Answer.findByIdAndDelete(id);
+
+const destroyAll = ({ userId }) => Answer.deleteMany({ user: userId });
+
+export default {
+	create,
+	list,
+	show,
+	update,
+	destroy,
+	destroyAll
+};

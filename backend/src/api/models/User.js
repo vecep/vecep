@@ -22,6 +22,6 @@ const UserSchema = new mongoose.Schema({
 	picture: ImageSchema
 });
 
-const User = mongoose.model('Image', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 export default User;
