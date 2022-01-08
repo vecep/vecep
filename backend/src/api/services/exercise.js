@@ -8,7 +8,7 @@ const show = ({ id }) => Exercise.findById(id);
 
 const update = ({ id, exercise }) => Exercise.findByIdAndUpdate(id, exercise, { new: true });
 
-const destroy = ({ id }) => Exercise.findByIdAndRemove(id);
+const destroy = ({ id }) => Exercise.findByIdAndDelete(id);
 
 export default {
 	create,
