@@ -1,8 +1,9 @@
 import Answer from '../models/Answer.js';
 
-const create = ({ answer }) => Answer.create(answer);
+const create = ({ userId, answer }) => Answer.create({ user: userId, ...answer });
 
-const list = ({ filters = {} } = {}) => Answer.find(filters).populate(['user', 'exercise']);
+const list = ({ userId, filters = {} } = {}) =>
+	Answer.find({ userId, filters }).populate(['user', 'exercise']);
 
 const show = ({ id }) => Answer.findById(id);
 

@@ -2,7 +2,8 @@ import service from '../services/answer.js';
 
 const create = async (req, res, next) => {
 	try {
-		res.content = await service.create({ answer: req.body });
+		const { userId } = req;
+		res.content = await service.create({ userId, answer: req.body });
 		res.message = 'Answer created successfully';
 		next();
 	} catch (err) {
@@ -12,7 +13,8 @@ const create = async (req, res, next) => {
 
 const list = async (req, res, next) => {
 	try {
-		res.content = await service.list({ filters: req.query });
+		const { userId } = req;
+		res.content = await service.list({ userId, filters: req.query });
 		res.message = 'Answers fetched successfully';
 		next();
 	} catch (err) {
@@ -55,7 +57,7 @@ const destroy = async (req, res, next) => {
 
 const destroyAll = async (req, res, next) => {
 	try {
-		const { userId } = req.params;
+		const { userId } = req;
 		res.content = await service.destroyAll({ userId });
 		res.message = 'Answer deleted successfully';
 		next();
