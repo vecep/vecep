@@ -6,18 +6,12 @@ export default createGlobalStyle`
 		margin: 0;
 		outline: 0;
 		transition: 0.2s;
-	} 
-	.container {
-		margin: auto;
-		width: 50%;        
-		padding: 10px;
-		text-align: center;        
 	}
 	body {
-		background: ${(props) => props.theme.background};
-		color: ${(props) => props.theme.text};        
+		background: ${({ theme }) => theme.body};
+		color: ${({ theme }) => theme.text};
 	}
 	h1 {
-		color: ${(props) => props.theme.titles};        
+		color: ${({ theme }) => theme.titles};        
 	}
 `;

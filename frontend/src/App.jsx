@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from 'styles/theme.js';
 import GlobalStyles from 'styles/globalStyles.js';
 import Menu from 'components/Menu';
+import Content from 'components/Content';
 import { BrowserRouter as Router } from 'react-router-dom';
 import useDarkMode from 'hooks/useDarkMode';
 
@@ -22,6 +23,7 @@ const App = () => {
 			<Router>
 				<Container>
 					<Menu toggleDarkMode={toggleDarkMode} />
+					<Content />
 				</Container>
 			</Router>
 		</ThemeProvider>

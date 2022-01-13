@@ -4,12 +4,13 @@ import Link from 'components/Link';
 export const Navbar = styled.nav`
 	display: flex;
 	position: sticky;
-	height: 45px;
+	height: 50px;
 	justify-content: flex-end;
 	align-items: center;
 	background-color: ${({ theme }) => theme.body};
 	z-index: 9999;
 	padding: 0 100px;
+	box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.2);
 
 	& > :not(:first-child, :last-child) {
 		margin-right: 50px;
