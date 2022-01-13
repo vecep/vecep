@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { StyledLink } from './styles';
 
-const Link = (props) => <RouterLink {...props} draggable="false" />;
+const Link = (props) => <StyledLink {...props} draggable="false" />;
 
 export default Link;

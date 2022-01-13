@@ -20,13 +20,4 @@ export default createGlobalStyle`
 	h1 {
 		color: ${(props) => props.theme.titles};        
 	}
-	a {
-		text-decoration: none;
-		color: ${({ theme }) => theme.text};
-		transition: 0.5s;
-
-		&:hover {
-			color: #48a7ff !important;
-		}
-	}
 `;
