@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'components/Link';
 import IconLink from 'components/IconLink';
-import { Navbar, ToggleButton, Dropdown, DropdownContent, LoginLink } from './styles';
+import { Navbar, Logo, ToggleButton, Dropdown, DropdownContent, LoginLink } from './styles';
 import PropTypes from 'prop-types';
 import useDarkMode from 'hooks/useDarkMode';
 import Avatar from '@mui/material/Avatar';
@@ -12,7 +12,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 const Menu = ({ toggleDarkMode }) => {
 	const [isDarkMode] = useDarkMode();
 
-	const loggedIn = false;
+	const loggedIn = true;
 	const permissions = { canCreateExercises: true };
 	const { canCreateExercises } = permissions;
 
@@ -20,7 +20,9 @@ const Menu = ({ toggleDarkMode }) => {
 
 	return (
 		<Navbar>
-			<Link to="/home">VECEP</Link>
+			<Logo>
+				<Link to="/home">VECEP</Link>
+			</Logo>
 
 			<ToggleButton onClick={toggleDarkMode}>{isDarkMode ? `🌛` : `🌞`}</ToggleButton>
 			<Link to="/exercicios">Exercícios</Link>

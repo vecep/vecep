@@ -11,14 +11,14 @@ export const Navbar = styled.nav`
 	z-index: 9999;
 	padding: 0 100px;
 
-	& > :first-child {
-		justify-self: flex-start;
-		flex: 1;
-	}
-
 	& > :not(:first-child, :last-child) {
 		margin-right: 50px;
 	}
+`;
+
+export const Logo = styled.div`
+	justify-self: flex-start;
+	flex: auto;
 `;
 
 export const ToggleButton = styled.button`
