@@ -4,6 +4,7 @@ import imageController from '../controllers/cloudinary.js';
 import userController from '../controllers/user.js';
 import answerController from '../controllers/answer.js';
 import authController from '../controllers/auth.js';
+import subjectController from '../controllers/subject.js';
 import { verifySignUp, authJwt } from '../middlewares/index.js';
 
 const router = express.Router();
@@ -40,6 +41,13 @@ router.put('/api/answer/:id', [verifyToken], answerController.update);
 router.patch('/api/answer/:id', [verifyToken], answerController.update);
 router.delete('/api/answer/:id', [verifyToken], answerController.destroy);
 router.delete('/api/answers', [verifyToken], answerController.destroyAll);
+
+router.post('/api/subject', [verifyToken, isAdmin], subjectController.create);
+router.get('/api/subjects', subjectController.list);
+router.get('/api/subject/:id', [verifyToken, isAdmin], subjectController.show);
+router.put('/api/subject/:id', [verifyToken, isAdmin], subjectController.update);
+router.patch('/api/subject/:id', [verifyToken, isAdmin], subjectController.update);
+router.delete('/api/subject/:id', [verifyToken, isAdmin], subjectController.destroy);
 
 router.post(
 	'/api/auth/signup',
