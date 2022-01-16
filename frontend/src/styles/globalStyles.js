@@ -5,7 +5,7 @@ export default createGlobalStyle`
 		box-sizing: border-box;
 		margin: 0;
 		outline: 0;
-		transition: 0.2s;
+		color: ${({ theme }) => theme.text};
 	}
 	body {
 		background: ${({ theme }) => theme.body};

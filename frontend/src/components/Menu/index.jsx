@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'components/Link';
 import IconLink from 'components/IconLink';
-import { Navbar, Logo, ToggleButton, Dropdown, DropdownContent, LoginLink } from './styles';
+import { Navbar, Logo, ToggleButton, Links, Dropdown, DropdownContent, LoginLink } from './styles';
 import PropTypes from 'prop-types';
 import useDarkMode from 'hooks/useDarkMode';
 import Avatar from '@mui/material/Avatar';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AdminIcon from '@mui/icons-material/AdminPanelSettings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Squash as Hamburger } from 'hamburger-react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Menu = ({ toggleDarkMode }) => {
 	const [isDarkMode] = useDarkMode();
+	const matches = useMediaQuery('(min-width: 770px)');
+	const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
 	const loggedIn = true;
 	const permissions = { canCreateExercises: true };
@@ -18,45 +22,56 @@ const Menu = ({ toggleDarkMode }) => {
 
 	const handleLogout = () => {};
 
+	const toggleHamburger = () => {
+		setHamburgerOpen(!hamburgerOpen);
+	};
+
+	useEffect(() => {
+		matches && setHamburgerOpen(false);
+	}, [matches]);
+
 	return (
 		<Navbar>
 			<Logo>
 				<Link to="/home">VECEP</Link>
 			</Logo>
 
-			<ToggleButton onClick={toggleDarkMode}>{isDarkMode ? `🌛` : `🌞`}</ToggleButton>
-			<Link to="/exercicios">Exercícios</Link>
-			<Link to="/provas">Provas</Link>
-			{loggedIn && <Link to="/resultados">Resultados</Link>}
+			<Links open={hamburgerOpen} animate={matches}>
+				<ToggleButton onClick={toggleDarkMode}>{isDarkMode ? `🌛` : `🌞`}</ToggleButton>
+				<Link to="/exercicios">Exercícios</Link>
+				<Link to="/provas">Provas</Link>
+				{loggedIn && <Link to="/resultados">Resultados</Link>}
 
-			<Dropdown>
-				<Avatar alt="Imagem de perfil genérica" sx={{ height: '30px', width: '30px' }} />
+				<Dropdown>
+					<Avatar alt="Imagem de perfil genérica" sx={{ height: '30px', width: '30px' }} />
+					<DropdownContent animate={matches}>
+						{!loggedIn ? (
+							<>
+								<LoginLink to="/login">Faça login</LoginLink>
+								{matches && ` ou `}
+								<Link to="/cadastro">Cadastre-se</Link>
+							</>
+						) : (
+							<>
+								{canCreateExercises && (
+									<IconLink icon={<AdminIcon />} to="/admin">
+										{matches && 'Admin'}
+									</IconLink>
+								)}
 
-				<DropdownContent>
-					{!loggedIn ? (
-						<div>
-							<LoginLink to="/login">Faça login</LoginLink>
-							{` ou `}
-							<Link to="/cadastro">cadastre-se</Link>
-						</div>
-					) : (
-						<>
-							{canCreateExercises && (
-								<IconLink icon={<AdminPanelSettingsIcon />} to="/admin">
-									Admin
+								<IconLink icon={<SettingsIcon />} to="/definicoes">
+									{matches && 'Definições'}
 								</IconLink>
-							)}
+								<IconLink icon={<LogoutIcon />} to="/home" onClick={handleLogout}>
+									{matches && 'Logout'}
+								</IconLink>
+							</>
+						)}
+					</DropdownContent>
+				</Dropdown>
+			</Links>
 
-							<IconLink icon={<SettingsIcon />} to="/definicoes">
-								Definições
-							</IconLink>
-							<IconLink icon={<LogoutIcon />} to="/home" onClick={handleLogout}>
-								Logout
-							</IconLink>
-						</>
-					)}
-				</DropdownContent>
-			</Dropdown>
+			<Hamburger toggled={hamburgerOpen} toggle={toggleHamburger} size={20} />
 		</Navbar>
 	);
 };

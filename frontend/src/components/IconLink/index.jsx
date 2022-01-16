@@ -12,7 +12,7 @@ import { Container } from './styles';
  * @returns A `div` with the mounted properties
  */
 const IconLink = ({ props, children, linkProps, icon, to, reverse = false }) => (
-	<Container {...props} reverse={reverse}>
+	<Container {...props} reverse={reverse} spaced={!!children}>
 		<Link {...linkProps} to={to}>
 			{children}
 			{icon}

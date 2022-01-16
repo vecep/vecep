@@ -5,7 +5,7 @@ export const Container = styled.div`
 		display: flex;
 		flex-direction: ${({ reverse }) => (reverse ? 'row-reverse' : 'row')};
 		align-items: center;
-		justify-content: space-between;
+		justify-content: ${({ spaced }) => (spaced ? 'space-between' : 'center')};
 		gap: 5px;
 	}
 `;
