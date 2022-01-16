@@ -13,5 +13,10 @@ export const StyledLink = styled(Link)`
 		:hover {
 			color: #48a7ff;
 		}
+
+		:active {
+			background: ${({ theme }) => theme.dimmed};
+			transition: background 200ms ease-out;
+		}
 	}
 `;

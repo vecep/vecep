@@ -4,11 +4,10 @@ import Link from 'components/Link';
 export const Links = styled.div`
 	display: flex;
 	align-items: center;
-	flex: auto;
 	height: 100%;
 
 	> * {
-		flex: auto;
+		flex-basis: 100%;
 		text-align: center;
 		justify-content: center;
 	}
@@ -43,11 +42,16 @@ export const Navbar = styled.nav`
 	display: flex;
 	position: sticky;
 	top: 0;
+	padding-inline: 50px;
 	height: 50px;
 	background: ${({ theme }) => theme.body};
-	padding-inline: 100px 50px;
 	box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.2);
 	border-radius: 0 0 15px 15px;
+	z-index: 9999;
+
+	> * {
+		flex-basis: 100%;
+	}
 
 	.hamburger-react {
 		display: none;
@@ -55,7 +59,7 @@ export const Navbar = styled.nav`
 	}
 
 	@media only screen and (max-width: 768px) {
-		padding-inline: 35px;
+		padding-inline: 15px 20px;
 
 		.hamburger-react {
 			display: block;
@@ -65,11 +69,17 @@ export const Navbar = styled.nav`
 
 export const Logo = styled.div`
 	justify-self: flex-start;
-	flex-grow: 1;
 	height: 100%;
+
+	a {
+		padding-inline: 25px;
+	}
 `;
 
 export const ToggleButton = styled.button`
+	display: inline-flex;
+	height: 100%;
+	align-items: center;
 	background: none;
 	font-size: 17px;
 	border: none;
@@ -79,32 +89,42 @@ export const ToggleButton = styled.button`
 	@media only screen and (max-width: 768px) {
 		display: none;
 	}
+
+	:active {
+		background: ${({ theme }) => theme.dimmed};
+		transition: background 300ms ease-out;
+	}
 `;
 
 export const DropdownContent = styled.div`
 	position: absolute;
+	top: 100%;
+	transform: translateY(-250%);
+	visibility: hidden;
 	background-color: ${({ theme }) => theme.body_reverse};
 	color: ${({ theme }) => theme.text_reverse};
 	border-radius: 5px;
-	text-align: center;
-	padding: 10px 20px;
-	transform: translateY(-250%);
 	width: max-content;
-	overflow: hidden;
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-	visibility: hidden;
-	top: 100%;
+	overflow: hidden;
 	transition: ${({ animate }) => (animate ? 'visibility 1s, transform 700ms ease-in-out' : 'none')};
 
 	* {
 		color: ${({ theme }) => theme.text_reverse};
-		margin: 4px 0;
+	}
+
+	a {
+		padding: 0.7em 1em;
+
+		:active {
+			background: ${({ theme }) => theme.dimmed_reverse};
+			transition: background 200ms ease-out;
+		}
 	}
 
 	@media only screen and (max-width: 768px) {
 		display: flex;
 		visibility: visible;
-		width: 90%;
 		top: 0;
 		transform: translateY(0%);
 		justify-content: space-evenly;
@@ -142,10 +162,6 @@ export const LoginLink = styled(Link)`
 
 		:hover {
 			text-decoration: underline;
-		}
-
-		@media only screen and (max-width: 1400px) {
-			display: block;
 		}
 	}
 `;

@@ -44,11 +44,10 @@ const Menu = ({ toggleDarkMode }) => {
 
 				<Dropdown>
 					<Avatar alt="Imagem de perfil genérica" sx={{ height: '30px', width: '30px' }} />
-					<DropdownContent animate={matches}>
+					<DropdownContent animate={matches} login={!loggedIn}>
 						{!loggedIn ? (
 							<>
 								<LoginLink to="/login">Faça login</LoginLink>
-								{matches && ` ou `}
 								<Link to="/cadastro">Cadastre-se</Link>
 							</>
 						) : (

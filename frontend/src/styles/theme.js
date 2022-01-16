@@ -1,17 +1,19 @@
 export const lightTheme = {
-	body: '#E0FBFC',
+	body: '#E0E0E0',
 	text: '#293241',
-	background: '#27303F',
+	dimmed: '#EBEBEB',
 
 	body_reverse: '#293241',
-	text_reverse: '#E0FBFC'
+	text_reverse: '#E0FBFC',
+	dimmed_reverse: '#374258'
 };
 
 export const darkTheme = {
 	body: '#293241',
 	text: '#E0FBFC',
-	background: '#ECECEC',
+	dimmed: '#374258',
 
-	body_reverse: '#E0FBFC',
-	text_reverse: '#293241'
+	body_reverse: '#E0E0E0',
+	text_reverse: '#293241',
+	dimmed_reverse: '#EBEBEB'
 };
