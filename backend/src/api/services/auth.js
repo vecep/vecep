@@ -12,12 +12,14 @@ const signup = ({ user }) => {
 
 	const encryptedPassword = bcrypt.hashSync(user.password, 8);
 
-	return userService.create({
+	userService.create({
 		user: {
 			...user,
 			password: encryptedPassword
 		}
 	});
+
+	return { ...user, password: undefined };
 };
 
 const signin = ({ username, password }) =>
