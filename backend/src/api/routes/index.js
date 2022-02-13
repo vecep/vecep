@@ -51,7 +51,7 @@ router.delete('/api/subject/:id', [verifyToken, isAdmin], subjectController.dest
 
 router.post(
 	'/api/auth/signup',
-	[verifySignUp.checkDuplicateUsernameAndEmail, verifySignUp.checkRoles],
+	[verifySignUp.checkDuplicateUsernameAndEmail, verifySignUp.checkRole],
 	authController.signup
 );
 router.post('/api/auth/signin', authController.signin);
