@@ -7,5 +7,5 @@ export const Container = styled.main`
 	align-items: center;
 	width: 100%;
 	height: 100%;
-	padding: 3em 15em;
+	padding: 3em 15%;
 `;

@@ -10,17 +10,20 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Squash as Hamburger } from 'hamburger-react';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import authApi from 'services/auth';
+import usePermissions from 'hooks/usePermissions';
 
 const Menu = ({ toggleDarkMode }) => {
 	const [isDarkMode] = useDarkMode();
+	const permissions = usePermissions();
 	const matches = useMediaQuery('(min-width: 770px)');
 	const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
-	const loggedIn = true;
-	const permissions = { canCreateExercises: true };
-	const { canCreateExercises } = permissions;
+	const isLoggedIn = JSON.parse(localStorage.getItem('user'))?.accessToken;
 
-	const handleLogout = () => {};
+	const handleLogout = () => {
+		authApi.logout();
+	};
 
 	const toggleHamburger = () => {
 		setHamburgerOpen(!hamburgerOpen);
@@ -40,20 +43,20 @@ const Menu = ({ toggleDarkMode }) => {
 				<ToggleButton onClick={toggleDarkMode}>{isDarkMode ? `🌛` : `🌞`}</ToggleButton>
 				<Link to="/exercicios">Exercícios</Link>
 				<Link to="/provas">Provas</Link>
-				{loggedIn && <Link to="/resultados">Resultados</Link>}
+				{isLoggedIn && <Link to="/resultados">Resultados</Link>}
 
 				<Dropdown>
 					<Avatar alt="Imagem de perfil genérica" sx={{ height: '30px', width: '30px' }} />
-					<DropdownContent animate={matches} login={!loggedIn}>
-						{!loggedIn ? (
+					<DropdownContent animate={matches} login={!isLoggedIn}>
+						{!isLoggedIn ? (
 							<>
 								<LoginLink to="/login">Faça login</LoginLink>
 								<Link to="/cadastro">Cadastre-se</Link>
 							</>
 						) : (
 							<>
-								{canCreateExercises && (
-									<IconLink icon={<AdminIcon />} to="/admin">
+								{permissions?.manage && (
+									<IconLink icon={<AdminIcon />} to="/management">
 										{matches && 'Admin'}
 									</IconLink>
 								)}
