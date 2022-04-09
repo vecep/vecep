@@ -5,7 +5,7 @@ const create = ({ userId, answer }) => Answer.create({ user: userId, ...answer }
 const list = ({ userId, filters = {} } = {}) =>
 	Answer.find({ userId, filters }).populate(['user', 'exercise']);
 
-const show = ({ id }) => Answer.findById(id);
+const show = ({ id, filters }) => Answer.finOne(id, filters);
 
 const update = ({ id, answer }) => Answer.findByIdAndUpdate(id, answer, { new: true });
 

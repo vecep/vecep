@@ -22,8 +22,7 @@ const list = async (req, res, next) => {
 
 const show = async (req, res, next) => {
 	try {
-		const { id } = req.params;
-		res.content = await service.show({ id });
+		res.content = await service.show({ id: req.params, filters: req.query });
 		res.message = 'User fetched successfully';
 		next();
 	} catch (err) {

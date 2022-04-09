@@ -21,16 +21,14 @@ const checkDuplicateUsernameAndEmail = async (req, res, next) => {
 	}
 };
 
-const checkRoles = (req, res, next) => {
-	const { roles: reqRoles } = req.body;
+const checkRole = (req, res, next) => {
+	const { role } = req.body;
 
-	reqRoles.filter((role) => {
-		if (!Object.values(roles).includes(role)) {
-			throw new BadRequestError('Invalid role: ' + role);
-		}
-	});
+	if (!Object.values(roles).includes(role)) {
+		throw new BadRequestError('Invalid role: ' + role);
+	}
 
 	next();
 };
 
-export default { checkDuplicateUsernameAndEmail, checkRoles };
+export default { checkDuplicateUsernameAndEmail, checkRole };

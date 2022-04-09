@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { requiredArray } from '../utils/index.js';
 import ImageSchema from '../schemas/Image.js';
 import roles from '../utils/roles.js';
 
@@ -13,10 +12,10 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	roles: {
-		type: [String],
+	role: {
+		type: String,
 		default: [roles.DEFAULT],
-		validate: requiredArray
+		required: true
 	},
 	picture: ImageSchema
 });
