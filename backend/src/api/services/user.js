@@ -4,7 +4,7 @@ const create = ({ user }) => User.create(user);
 
 const list = ({ filters = {} } = {}) => User.find(filters);
 
-const show = ({ filters }) => User.findOne(filters);
+const show = ({ id, filters }) => User.findOne(id, filters);
 
 const update = ({ id, user }) => User.findByIdAndUpdate(id, user, { new: true });
 

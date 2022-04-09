@@ -4,7 +4,7 @@ const create = ({ subject }) => Subject.create(subject);
 
 const list = ({ filters = {} } = {}) => Subject.find(filters);
 
-const show = ({ id }) => Subject.findById(id);
+const show = ({ id, filters }) => Subject.findOne(id, filters);
 
 const update = ({ id, subject }) => Subject.findByIdAndUpdate(id, subject, { new: true });
 
