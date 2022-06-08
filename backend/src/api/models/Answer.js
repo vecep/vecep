@@ -1,15 +1,13 @@
 import mongoose from 'mongoose';
 
 const AnswerSchema = new mongoose.Schema({
-	user: {
-		type: mongoose.Types.ObjectId,
-		ref: 'User'
-	},
-	exercise: {
-		type: mongoose.Types.ObjectId,
-		ref: 'Exercise'
-	},
-	answerId: mongoose.Types.ObjectId
+	userId: mongoose.Types.ObjectId,
+	exerciseId: mongoose.Types.ObjectId,
+	answerId: mongoose.Types.ObjectId,
+	isCorrect: {
+		type: Boolean,
+		required: true
+	}
 });
 
 const Answer = mongoose.model('Answer', AnswerSchema);

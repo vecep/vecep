@@ -29,7 +29,7 @@ const ExerciseSchema = new mongoose.Schema({
 		type: [
 			{
 				text: String,
-				correctAnswer: {
+				isCorrect: {
 					type: Boolean,
 					required: true
 				},

@@ -1,11 +1,11 @@
 import Answer from '../models/Answer.js';
 
-const create = ({ userId, answer }) => Answer.create({ user: userId, ...answer });
+const create = ({ userId, answerId, exerciseId, isCorrect }) =>
+	Answer.create({ userId, answerId, exerciseId, isCorrect });
 
-const list = ({ userId, filters = {} } = {}) =>
-	Answer.find({ userId, filters }).populate(['user', 'exercise']);
+const list = ({ userId, filters = {} } = {}) => Answer.find({ userId, filters });
 
-const show = ({ id, filters }) => Answer.finOne(id, filters);
+const show = ({ queryParameters, filters }) => Answer.finOne(queryParameters, filters);
 
 const update = ({ id, answer }) => Answer.findByIdAndUpdate(id, answer, { new: true });
 

@@ -10,7 +10,7 @@ import { verifySignUp, authJwt } from '../middlewares/index.js';
 const router = express.Router();
 const { verifyToken, isAdmin } = authJwt;
 
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
 	res.send('Welcome to VECEP-API :)');
 });
 

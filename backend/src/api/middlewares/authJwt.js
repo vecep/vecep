@@ -23,7 +23,7 @@ const verifyToken = (req, res, next) => {
 
 const isAdmin = async (req, res, next) => {
 	try {
-		const user = await userService.show({ filters: { id: req.userId } });
+		const user = await userService.show({ queryParams: { id: req.userId } });
 
 		if (user.role !== roles.ADMIN) {
 			throw new ForbiddenError('Admin permission required');

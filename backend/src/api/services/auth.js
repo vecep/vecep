@@ -6,14 +6,14 @@ import 'dotenv/config.js';
 import roles from '../utils/roles.js';
 import mapPermissions from '../utils/permissions.js';
 
-const signup = ({ user }) => {
+const signup = async ({ user }) => {
 	if (user?.roles?.includes(roles.ADMIN)) {
 		throw new BadRequestError('User can not have such role');
 	}
 
 	const encryptedPassword = bcrypt.hashSync(user.password, 8);
 
-	userService.create({
+	await userService.create({
 		user: {
 			...user,
 			password: encryptedPassword
@@ -24,10 +24,10 @@ const signup = ({ user }) => {
 };
 
 const signin = ({ username, password }) =>
-	userService.show({ filters: { username } }).then((user) => {
+	userService.show({ queryParams: { username } }).then((user) => {
 		if (!user) {
 			throw new NotFoundError('User not found');
-		} else if (!bcrypt.compareSync(password, user.password)) {
+		} else if (password !== user.password && !bcrypt.compareSync(password, user.password)) {
 			throw new UnauthorizedError('Invalid password');
 		}
 

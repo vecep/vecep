@@ -3,7 +3,12 @@ import service from '../services/answer.js';
 const create = async (req, res, next) => {
 	try {
 		const { userId } = req;
-		res.content = await service.create({ userId, answer: req.body });
+		res.content = await service.create({
+			userId,
+			answerId: req.body.answerId,
+			exerciseId: req.body.exerciseId,
+			isCorrect: req.body.isCorrect
+		});
 		res.message = 'Answer created successfully';
 		next();
 	} catch (err) {
@@ -24,7 +29,7 @@ const list = async (req, res, next) => {
 
 const show = async (req, res, next) => {
 	try {
-		res.content = await service.show({ id: req.params, filters: req.query });
+		res.content = await service.show({ queryParameters: req.params, filters: req.query });
 		res.message = 'Answer fetched successfully';
 		next();
 	} catch (err) {
