@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import * as authApi from 'services/auth';
 import { handleError } from 'utils';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import { AuthContext } from 'contexts/AuthContext';
 
-const Login = () => {
+const Signup = () => {
 	const navigate = useNavigate();
 	const { setIsLoggedIn } = useContext(AuthContext);
 
 	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		authApi
-			.signin({ username, password })
+			.signup({ username, email, password })
 			.then(() => {
 				setIsLoggedIn(true);
 				navigate('/exercicios');
@@ -26,7 +26,7 @@ const Login = () => {
 
 	return (
 		<div>
-			Login
+			Cadastro
 			<form onSubmit={handleSubmit}>
 				<br />
 				<label htmlFor="username">Username</label>
@@ -36,7 +36,16 @@ const Login = () => {
 					type="text"
 					autoComplete="username"
 					onChange={(e) => setUsername(e.target.value)}
-				></input>
+				/>
+				<br />
+				<label htmlFor="email">Email</label>
+				<br />
+				<input
+					id="email"
+					type="email"
+					autoComplete="email"
+					onChange={(e) => setEmail(e.target.value)}
+				/>
 				<br />
 				<label htmlFor="password">Senha</label>
 				<br />
@@ -45,13 +54,13 @@ const Login = () => {
 					type="password"
 					autoComplete="current-password"
 					onChange={(e) => setPassword(e.target.value)}
-				></input>
+				/>
 				<br />
 				<br />
-				<input type="submit" value="Login" />
+				<input type="submit" value="Cadastrar" />
 			</form>
 		</div>
 	);
 };
 
-export default Login;
+export default Signup;

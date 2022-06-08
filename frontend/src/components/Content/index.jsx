@@ -9,16 +9,18 @@ import Home from 'views/Home';
 import Login from 'views/Login';
 import NotFound from 'views/NotFound';
 import Practice from 'views/Practice';
-import Register from 'views/Register';
+import Signup from 'views/Signup';
 import Results from 'views/Results';
 import { Container } from './styles.js';
 import usePermissions from 'hooks/usePermissions';
+import useMobile from 'hooks/useMobile';
 
 const Content = () => {
 	const permissions = usePermissions();
+	const [isMobile] = useMobile();
 
 	return (
-		<Container>
+		<Container isMobile={isMobile}>
 			<Routes>
 				<Route exact path="/" element={<Navigate to="/home" />} />
 				<Route exact path="/home" element={<Home />} />
@@ -27,7 +29,7 @@ const Content = () => {
 				<Route path="/simulado" element={<Practice />} />
 				<Route path="/resultados" element={<Results />} />
 				<Route path="/definicoes" element={<Configurations />} />
-				<Route path="/cadastro" element={<Register />} />
+				<Route path="/cadastro" element={<Signup />} />
 				<Route path="/login" element={<Login />} />
 				<Route
 					path="/management"

@@ -6,6 +6,7 @@ import Menu from 'components/Menu';
 import Content from 'components/Content';
 import { BrowserRouter as Router } from 'react-router-dom';
 import useDarkMode from 'hooks/useDarkMode';
+import AuthProvider from 'contexts/AuthContext';
 
 const Container = styled.div`
 	display: flex;
@@ -20,12 +21,14 @@ const App = () => {
 	return (
 		<ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
 			<GlobalStyles />
-			<Router>
-				<Container>
-					<Menu toggleDarkMode={toggleDarkMode} />
-					<Content />
-				</Container>
-			</Router>
+			<AuthProvider>
+				<Router>
+					<Container>
+						<Menu toggleDarkMode={toggleDarkMode} />
+						<Content />
+					</Container>
+				</Router>
+			</AuthProvider>
 		</ThemeProvider>
 	);
 };

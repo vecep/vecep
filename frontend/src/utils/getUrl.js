@@ -4,7 +4,7 @@ const getBaseUrl = () => {
 	if (process.env.NODE_ENV === 'production') {
 		baseUrl = '';
 	} else {
-		baseUrl = 'http://localhost:3001/api';
+		baseUrl = 'http://localhost:3001';
 	}
 
 	return baseUrl;
@@ -16,7 +16,7 @@ const getApiUrl = () => {
 	if (process.env.NODE_ENV === 'production') {
 		apiUrl = '';
 	} else {
-		apiUrl = 'http://localhost:3001/api';
+		apiUrl = 'http://192.168.15.131:3001/api';
 	}
 
 	return apiUrl;

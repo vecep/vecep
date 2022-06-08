@@ -1,13 +1,18 @@
 import api from 'utils/apiHandler';
 
-const signup = (username, email, password) =>
-	api.post('/auth/signup', {
-		username,
-		email,
-		password
-	});
+export const signup = ({ username, email, password }) =>
+	api
+		.post('/auth/signup', {
+			username,
+			email,
+			password
+		})
+		.then((response) => {
+			const user = response.data.content;
+			signin({ username: user.username, password });
+		});
 
-const signin = (username, password) =>
+export const signin = ({ username, password }) =>
 	api
 		.post('/auth/signin', {
 			username,
@@ -20,17 +25,10 @@ const signin = (username, password) =>
 			return user;
 		});
 
-const logout = () => {
+export const logout = () => {
 	localStorage.removeItem('user');
 };
 
-const getCurrentUser = () => {
+export const getCurrentUser = () => {
 	return JSON.parse(localStorage.getItem('user'));
-};
-
-export default {
-	signup,
-	signin,
-	logout,
-	getCurrentUser
 };
