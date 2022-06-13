@@ -32,7 +32,7 @@ const Exercises = () => {
 		));
 
 	const renderExercises = () =>
-		exercises?.map((exercise) => <Card key={exercise._id} exercise={exercise}></Card>);
+		exercises?.map((exercise) => <Card key={exercise._id} exercise={exercise} />);
 
 	return (
 		<>

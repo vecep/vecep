@@ -1,4 +1,4 @@
-export default (string) => {
+export default (string, hexOpacity = '') => {
 	let hash = 0;
 	let i;
 
@@ -13,5 +13,5 @@ export default (string) => {
 		color += `00${value.toString(16)}`.slice(-2);
 	}
 
-	return color;
+	return color + hexOpacity;
 };
