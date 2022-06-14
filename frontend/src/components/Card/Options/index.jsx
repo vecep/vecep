@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import CloudImage from 'components/CloudImage';
 import useMobile from 'hooks/useMobile';
 import * as S from './styles';
+import Latext from 'components/Latext';
 
 const Options = ({ options, selectedAnswer, handleChange, answered, readOnly }) => {
 	const [isMobile] = useMobile();
@@ -17,7 +18,6 @@ const Options = ({ options, selectedAnswer, handleChange, answered, readOnly }) 
 				.sort((a, b) => !!a.text - !!b.text)
 				.map((o) => (
 					<S.OptionsContainer key={o._id}>
-						{/* <Latext label answerColor={getAnswerColor(o)}> */}
 						<FormControlLabel
 							key={o._id}
 							value={o._id}
@@ -28,12 +28,11 @@ const Options = ({ options, selectedAnswer, handleChange, answered, readOnly }) 
 										<CloudImage cloudId={o.image.cloudId} alt={o.image.description} />
 									</S.ImageWrapper>
 								) : (
-									o.text
+									<Latext label>{o.text}</Latext>
 								)
 							}
 							disabled={answered || readOnly}
 						/>
-						{/* </Latext> */}
 					</S.OptionsContainer>
 				))}
 		</S.Grid>

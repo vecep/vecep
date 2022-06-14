@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { styled as MStyled } from '@mui/system';
 import { get } from 'lodash';
 import Radio from '@mui/material/Radio';
@@ -20,14 +20,10 @@ export const OptionsContainer = styled.div`
 export const Option = MStyled(Radio)``;
 
 export const Grid = styled.div`
-	${(props) =>
-		props.imageDisplay &&
-		css`
-			display: grid;
-			grid-template-columns: auto auto auto;
-			grid-template-rows: auto auto auto auto auto;
-			grid-auto-flow: 'row';
-		`}
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto auto auto auto auto;
+	grid-auto-flow: ${(props) => (props.imageDisplay ? 'row' : 'column')};
 `;
 
 export const ImageWrapper = styled.div`

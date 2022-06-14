@@ -7,6 +7,7 @@ import Content from 'components/Content';
 import { BrowserRouter as Router } from 'react-router-dom';
 import useDarkMode from 'hooks/useDarkMode';
 import AuthProvider from 'contexts/AuthContext';
+import 'katex/dist/katex.min.css';
 
 const Container = styled.div`
 	display: flex;

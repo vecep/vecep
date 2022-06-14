@@ -8,6 +8,7 @@ import { handleError, stringToColor } from 'utils';
 import { isEmpty } from 'lodash';
 import useMobile from 'hooks/useMobile';
 import { AuthContext } from 'contexts/AuthContext';
+import Latext from 'components/Latext';
 
 const Card = ({ exercise }) => {
 	const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -78,7 +79,9 @@ const Card = ({ exercise }) => {
 			<S.CardBody>
 				{!isEmpty(exercise.references) && renderReferences()}
 				<S.CardQuestion>
-					<S.QuestionText>{exercise.question}</S.QuestionText>
+					<S.QuestionText>
+						<Latext>{exercise.question}</Latext>
+					</S.QuestionText>
 					<Options
 						options={exercise.options}
 						selectedAnswer={selectedAnswer}

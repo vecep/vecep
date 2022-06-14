@@ -6,6 +6,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import CloudImage from 'components/CloudImage';
 import useMobile from 'hooks/useMobile';
 import * as S from './styles';
+import Latext from 'components/Latext';
 
 const Reference = ({ reference, position }) => {
 	const [isMobile] = useMobile();
@@ -20,7 +21,9 @@ const Reference = ({ reference, position }) => {
 				<S.Text>Referência {position}</S.Text>
 			</AccordionSummary>
 			<AccordionDetails>
-				<S.Text>{reference.text}</S.Text>
+				<S.Text>
+					<Latext>{reference.text}</Latext>
+				</S.Text>
 				{reference.image && (
 					<S.ImageContainer isMobile={isMobile}>
 						<CloudImage cloudId={reference.image.cloudId} alt={reference.image.description} />
