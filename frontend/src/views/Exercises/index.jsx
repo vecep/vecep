@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Subject } from './styles';
+import { Container, Subject, NotFoundMessage } from './styles';
 import Link from 'components/Link';
 import Header from 'components/Header';
 import * as subjectApi from 'services/subject';
 import * as exerciseApi from 'services/exercise';
 import { handleError } from 'utils';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import Card from 'components/Card';
+import { Button } from '@mui/material';
 
 const Exercises = () => {
-	const [subjects, setSubjects] = useState([]);
+	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
-	const [subject, setSubject] = useState();
-	const [exercises, setExercises] = useState([]);
+
+	const [subjects, setSubjects] = useState([]);
+	const [exercises, setExercises] = useState(null);
 	const location = useLocation();
 
 	useEffect(() => {
 		subjectApi.list().then(setSubjects).catch(handleError);
-		exerciseApi.list().then(setExercises).catch(handleError);
 	}, []);
 
 	useEffect(() => {
-		setSubject(searchParams.get('subject'));
+		searchParams.get('subject') &&
+			exerciseApi
+				.list({ subject: searchParams.get('subject') })
+				.then(setExercises)
+				.catch(handleError);
 	}, [location]);
 
 	const renderSubjectsGrid = () =>
@@ -32,12 +37,23 @@ const Exercises = () => {
 		));
 
 	const renderExercises = () =>
-		exercises?.map((exercise) => <Card key={exercise._id} exercise={exercise} />);
+		exercises?.length > 0 ? (
+			exercises.map((exercise) => <Card key={exercise._id} exercise={exercise} />)
+		) : (
+			<NotFoundMessage>
+				<p>Nenhum exercício encontrado :/</p>
+				<Button variant="outlined" onClick={() => navigate(-1)}>
+					Voltar
+				</Button>
+			</NotFoundMessage>
+		);
 
 	return (
 		<>
-			<Header pageTitle="Exercícios" />
-			<Container>{!subject ? renderSubjectsGrid() : renderExercises()}</Container>
+			<Header pageTitle="Exercícios" paths={['subject']} />
+			<Container>
+				{searchParams.get('subject') ? renderExercises() : renderSubjectsGrid()}
+			</Container>
 		</>
 	);
 };

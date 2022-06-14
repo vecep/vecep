@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './styles';
+import { useSearchParams } from 'react-router-dom';
 
 const Header = ({ pageTitle, paths }) => {
+	const [searchParams] = useSearchParams();
+
 	return (
 		<Container>
 			<h1>{pageTitle}</h1>
 			{paths?.map((path, idx) => {
-				if (path) return <span key={idx}> / {path}</span>;
+				if (searchParams.get(path)) return <span key={idx}> / {searchParams.get(path)}</span>;
 			})}
 		</Container>
 	);

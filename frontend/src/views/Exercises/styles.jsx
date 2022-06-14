@@ -39,3 +39,9 @@ export const Subject = styled.li`
 		cursor: pointer;
 	}
 `;
+
+export const NotFoundMessage = styled.div`
+	> p {
+		margin-bottom: 1em;
+	}
+`;
