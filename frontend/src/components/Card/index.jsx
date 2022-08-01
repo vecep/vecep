@@ -18,18 +18,19 @@ const Card = ({ exercise }) => {
 	const { isLoggedIn } = useContext(AuthContext);
 
 	useEffect(() => {
-		answerApi
-			.list({ exerciseId: exercise._id })
-			.then((response) => {
-				const [fetchedAnswer] = response;
+		isLoggedIn &&
+			answerApi
+				.list({ exerciseId: exercise._id })
+				.then((response) => {
+					const [fetchedAnswer] = response;
 
-				if (fetchedAnswer) {
-					setSelectedAnswer(fetchedAnswer.answerId);
-					setAnswered(true);
-					setIsCorrect(fetchedAnswer.isCorrect);
-				}
-			})
-			.catch(handleError);
+					if (fetchedAnswer) {
+						setSelectedAnswer(fetchedAnswer.answerId);
+						setAnswered(true);
+						setIsCorrect(fetchedAnswer.isCorrect);
+					}
+				})
+				.catch(handleError);
 	}, []);
 
 	const handleChangeAnswer = (e) => {
@@ -59,14 +60,21 @@ const Card = ({ exercise }) => {
 		exercise.references.map((r, index) => (
 			<Reference key={r._id} reference={r} position={exercise.references.length > 1 && index + 1} />
 		));
-	const renderFooter = () =>
-		answered ? (
-			<S.AnswerFeedback isCorrect={isCorrect}>
-				{isCorrect ? 'Resposta correta :)' : 'Resposta incorreta :('}
-			</S.AnswerFeedback>
-		) : (
-			<S.SubmitButton onClick={handleSubmit}>Responder</S.SubmitButton>
+
+	const renderFooter = () => {
+		if (answered)
+			return (
+				<S.AnswerFeedback isCorrect={isCorrect}>
+					{isCorrect ? 'Resposta correta' : 'Resposta incorreta'}
+				</S.AnswerFeedback>
+			);
+
+		return (
+			<S.SubmitButton onClick={handleSubmit} disabled={!selectedAnswer}>
+				Responder
+			</S.SubmitButton>
 		);
+	};
 
 	return (
 		<S.Container animateAnswer={answered} isCorrect={isCorrect}>
