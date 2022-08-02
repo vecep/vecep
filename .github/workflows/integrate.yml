@@ -77,12 +77,16 @@ jobs:
   sonar-analysis:
     needs: [unit-tests, code-quality]
     runs-on: ubuntu-latest
-    container: sonarsource/sonar-scanner-cli:latest
     steps: 
       - uses: actions/checkout@v3
-      - name: Cache node_modules
-        uses: actions/cache@v3
         with:
-          path: '**/node_modules'
-          key: npm-${{ hashFiles('package-lock.json') }}
-      - run: sonar-scanner -Dsonar.qualitygate.wait=true
+          fetch-depth: 0
+
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
