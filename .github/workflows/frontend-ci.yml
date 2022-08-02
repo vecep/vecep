@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Frontend Continuous Integration
 on:
   pull_request:
     paths:
@@ -40,28 +40,6 @@ jobs:
           path: '**/node_modules'
           key: npm-${{ hashFiles('package-lock.json') }}
 
-      - name: Run eslin report
-        run: npm run lint:report
-
-      - name: Upload eslint report for code-quality
-        uses: actions/upload-artifact@v3
-        with:
-          name: code-quality-report
-          path: reports/
-          retention-days: 1
-
-  code-quality:
-    needs: [npm-install]
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: npm-${{ hashFiles('package-lock.json') }}
-
       - name: Run tests with coverage
         run: npm run test:coverage
 
@@ -70,23 +48,29 @@ jobs:
         with:
           name: test-coverage-report
           path: |
-            reports/
-            coverage/
+            '**/reports/'
+            '**/coverage/'
           retention-days: 1
 
-  sonar-analysis:
-    needs: [unit-tests, code-quality]
+  code-quality:
+    needs: [npm-install]
     runs-on: ubuntu-latest
-    steps: 
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      - uses: sonarsource/sonarqube-quality-gate-action@master
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - name: Run eslint report
+        run: npm run lint:report
+
+      - name: Upload eslint report for code-quality
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-quality-report
+          path: '**/reports/'
+          retention-days: 1
