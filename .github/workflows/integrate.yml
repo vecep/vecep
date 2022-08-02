@@ -35,7 +35,7 @@ jobs:
     needs: [npm-install]
 
     steps:
-      uses: actions/cache@v3
+      - uses: actions/cache@v3
 
       - name: Run eslin report
         run: npm run lint:report
@@ -51,7 +51,7 @@ jobs:
     needs: [npm-install]
 
     steps:
-        uses: actions/cache@v3
+      - uses: actions/cache@v3
 
       - name: Run tests with coverage
         run: npm run test:coverage
