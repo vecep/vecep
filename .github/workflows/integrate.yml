@@ -16,14 +16,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "16.x"
+          node-version: '16.x'
 
       - name: Cache node_modules
         uses: actions/cache@v3
         with:
-          path: /node_modules
+          path: '**/node_modules'
           key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
 
       - name: Install dependencies
         run: npm ci --ignore-scripts
@@ -41,7 +40,6 @@ jobs:
           # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm
           key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
 
       - name: Run eslin report
         run: npm run lint:report
@@ -65,7 +63,6 @@ jobs:
           # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm
           key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
 
       - name: Run tests with coverage
         run: npm run test:coverage
@@ -91,5 +88,4 @@ jobs:
           # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm
           key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
       - run: sonar-scanner -Dsonar.qualitygate.wait=true
