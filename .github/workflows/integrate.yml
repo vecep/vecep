@@ -59,11 +59,11 @@ jobs:
       - name: Upload coverage report for unit-tests
         uses: actions/upload-artifact@v3
         with:
-          - name: test-coverage-report
-            path: |
-              reports/
-              coverage/
-            retention-days: 1
+          name: test-coverage-report
+          path: |
+            reports/
+            coverage/
+          retention-days: 1
 
   sonar-analysis:
     needs: [unit-tests, code-quality]
