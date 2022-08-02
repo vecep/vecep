@@ -13,6 +13,10 @@ const user = userEvent.setup();
 const renderComponent = ({ exercise = {} } = {}) => {
 	render(<Card exercise={{ ...exerciseMock, ...exercise }} />);
 };
+ 
+test('fails test', () => {
+	expect(1).toBe(null);
+});
 
 describe('Card Display', () => {
 	test('renders Subject title in the card', () => {
