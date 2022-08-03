@@ -96,9 +96,6 @@ jobs:
         with:
           name: code-quality-report
 
-      - name: Display structure of files
-        run: ls -R
-
       - name: SonarCloud scan 
         uses: SonarSource/sonarcloud-github-action@master
         with:

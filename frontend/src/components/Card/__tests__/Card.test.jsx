@@ -13,8 +13,6 @@ const user = userEvent.setup();
 const renderComponent = ({ exercise = {} } = {}) => {
 	render(<Card exercise={{ ...exerciseMock, ...exercise }} />);
 };
- 
-
 
 describe('Card Display', () => {
 	test('renders Subject title in the card', () => {
