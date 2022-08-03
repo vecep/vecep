@@ -42,59 +42,53 @@ jobs:
 
       - name: Run tests with coverage
         run: npm run test:coverage
-        
-      - name: Display structure of files
-        run: ls -R
 
       - name: Upload coverage report for unit-tests
         uses: actions/upload-artifact@v3
         with:
           name: test-coverage-report
           path: |
-            'reports/test-report.xml'
-            'coverage/'
+            './reports/test-report.xml'
+            './coverage/'
           retention-days: 1
 
-  # code-quality:
-  #   needs: [npm-install]
-  #   runs-on: ubuntu-latest
+  code-quality:
+    needs: [npm-install]
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - name: Cache node_modules
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: '**/node_modules'
-  #         key: npm-${{ hashFiles('package-lock.json') }}
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: npm-${{ hashFiles('package-lock.json') }}
 
-  #     - name: Run eslint report
-  #       run: npm run lint:report
+      - name: Run eslint report
+        run: npm run lint:report
 
-  #     - name: Upload eslint report for code-quality
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: code-quality-report
-  #         path: 'reports/eslint-report.json'
-  #         retention-days: 1
+      - name: Upload eslint report for code-quality
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-quality-report
+          path: './reports/eslint-report.json'
+          retention-days: 1
 
-  # sonar-analysis:
-  #   needs: [unit-tests, code-quality]
-  #   runs-on: ubuntu-latest
-  #   steps: 
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
+  sonar-analysis:
+    needs: [unit-tests, code-quality]
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-  #     - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v3
 
-  #     - name: Display structure of downloaded files
-  #       run: ls -R
-
-  #     - name: SonarCloud scan 
-  #       uses: SonarSource/sonarcloud-github-action@master
-  #       with:
-  #         projectBaseDir: frontend/
-  #       env:
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: SonarCloud scan 
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: frontend/
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
