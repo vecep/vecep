@@ -48,8 +48,8 @@ jobs:
         with:
           name: test-coverage-report
           path: |
-            '**/reports/'
-            '**/coverage/'
+            'reports/test-report.xml'
+            'coverage/'
           retention-days: 1
 
   code-quality:
@@ -72,7 +72,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: code-quality-report
-          path: '**/reports/'
+          path: 'reports/eslint-report.json'
           retention-days: 1
 
   sonar-analysis:
@@ -82,6 +82,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - uses: actions/download-artifact@v3
+
+      - name: Display structure of downloaded files
+        run: ls -R
 
       - name: SonarCloud scan 
         uses: SonarSource/sonarcloud-github-action@master
