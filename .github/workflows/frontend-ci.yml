@@ -43,13 +43,18 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
 
+      - name: Upload generic test data report for unit-tests
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-coverage-report
+          path: '**/reports/test-report.xml'
+          retention-days: 1
+
       - name: Upload coverage report for unit-tests
         uses: actions/upload-artifact@v3
         with:
           name: test-coverage-report
-          path: |
-            '**/reports/test-report.xml'
-            '**/coverage/'
+          path: '**/coverage/'
           retention-days: 1
 
   code-quality:
@@ -84,6 +89,12 @@ jobs:
           fetch-depth: 0
 
       - uses: actions/download-artifact@v3
+        with:
+          name: test-coverage-report
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: code-quality-report
 
       - name: Display structure of files
         run: ls -R
