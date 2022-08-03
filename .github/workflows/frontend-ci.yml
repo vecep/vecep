@@ -1,0 +1,105 @@
+name: Frontend Continuous Integration
+on:
+  pull_request:
+    paths:
+      - 'frontend/**'
+defaults:
+  run:
+    working-directory: frontend
+
+jobs:
+  npm-install: # with node_modules caching
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+  unit-tests:
+    needs: [npm-install]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Upload generic test data report for unit-tests
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-coverage-report
+          path: '**/reports/test-report.xml'
+          retention-days: 1
+
+      - name: Upload coverage report for unit-tests
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-coverage-report
+          path: '**/coverage/'
+          retention-days: 1
+
+  code-quality:
+    needs: [npm-install]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - name: Run eslint report
+        run: npm run lint:report
+
+      - name: Upload eslint report for code-quality
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-quality-report
+          path: '**/reports/eslint-report.json'
+          retention-days: 1
+
+  sonar-analysis:
+    needs: [unit-tests, code-quality]
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: test-coverage-report
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: code-quality-report
+
+      - name: SonarCloud scan 
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: frontend/
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
