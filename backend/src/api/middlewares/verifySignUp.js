@@ -6,8 +6,8 @@ const checkDuplicateUsernameAndEmail = async (req, res, next) => {
 	try {
 		const { username, email } = req.body;
 
-		const [userByName] = await userService.list({ filters: { username } });
-		const [userByEmail] = await userService.list({ filters: { email } });
+		const userByName = await userService.show({ filters: { username } });
+		const userByEmail = email && (await userService.show({ filters: { email } }));
 
 		if (userByName) {
 			throw new BadRequestError('Name already being used');

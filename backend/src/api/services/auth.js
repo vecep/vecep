@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import userService from '../services/user.js';
-import { NotFoundError, UnauthorizedError, BadRequestError } from '../errors/http/index.js';
+import { UnauthorizedError, BadRequestError } from '../errors/http/index.js';
 import 'dotenv/config.js';
 import roles from '../utils/roles.js';
 import mapPermissions from '../utils/permissions.js';
@@ -24,14 +24,11 @@ const signup = async ({ user }) => {
 };
 
 const signin = ({ username, password }) =>
-	userService.show({ queryParams: { username } }).then((user) => {
-		if (!user) {
-			throw new NotFoundError('User not found');
-		} else if (password !== user.password && !bcrypt.compareSync(password, user.password)) {
-			throw new UnauthorizedError('Invalid password');
-		}
+	userService.show({ filters: { username } }).then((user) => {
+		if (!user || (password !== user?.password && !bcrypt.compareSync(password, user?.password)))
+			throw new UnauthorizedError('Username or password is invalid');
 
-		var token = jwt.sign({ id: user.id }, process.env.SECRET, {
+		const token = jwt.sign({ id: user.id }, process.env.SECRET, {
 			expiresIn: 86400 // 24 hours
 		});
 
