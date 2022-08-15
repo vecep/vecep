@@ -15,7 +15,7 @@ app.use(router);
 app.use(defaultHandler);
 app.use(errorHandler);
 
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(`${process.env.MONGO_URL}/${process.env.MONGO_DB_NAME}`, {
 	useNewUrlParser: true
 });
 

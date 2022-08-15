@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import ImageSchema from '../Image';
+import ImageSchema from '../Image.js';
 
 const OptionSchema = new mongoose.Schema({
 	text: String,

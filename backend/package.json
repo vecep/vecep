@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node ./src/server.js",
     "dev": "env-cmd -f .env nodemon ./src/server.js",
-    "test": "env-cmd -f .env.test jest --runInBand"
+    "test": "env-cmd -f .env.test jest --runInBand",
+    "migrate:up": "migrate-mongo up",
+    "migrate:down": "migrate-mongo down"
   },
   "author": "VECEP",
   "license": "ISC",
@@ -28,6 +30,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^28.1.3",
+    "migrate-mongo": "^9.0.0",
     "nodemon": "^2.0.15",
     "prettier": "2.5.1",
     "supertest": "^6.2.4"
