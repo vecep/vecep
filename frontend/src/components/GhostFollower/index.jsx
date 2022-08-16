@@ -2,8 +2,12 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Ghost, GhostEyes, GhostHead, GhostMouth, GhostRip, GhostTail } from './style';
 import useFollowCursor from 'hooks/useFollowCursor';
+import useDarkMode from 'hooks/useDarkMode';
 
 function GhostFollower({ colorProps }) {
+	const [isDarkMode, toggleDarkMode] = useDarkMode();
+
+	const started = useRef();
 	const eyeRef = useRef();
 	const mouthRef = useRef();
 
@@ -26,42 +30,54 @@ function GhostFollower({ colorProps }) {
 			2
 		);
 
-		if (mouthRef.current)
+		if (started.current && mouthRef.current)
 			mouthRef.current.style.transform =
 				'translate(' + (-animationProps.skewX * 0.5 - 10) + 'px) scale(' + scaleMouth + ')';
 	});
 
+	const startHaunt = () => {
+		if (!started.current) {
+			started.current = true;
+
+			if (!isDarkMode) {
+				toggleDarkMode();
+			}
+		}
+	};
+
 	return (
 		<Container>
-			<div>
-				<Ghost ref={elementRef}>
-					<GhostHead>
-						<GhostEyes ref={eyeRef} customColor={colorProps.eye} />
-						<GhostMouth ref={mouthRef} customColor={colorProps.mouth} />
-					</GhostHead>
-					<GhostTail customColor={colorProps.cloth}>
-						<GhostRip />
-					</GhostTail>
-				</Ghost>
+			<Ghost
+				ref={started.current ? elementRef : null}
+				onClick={startHaunt}
+				isMoving={started.current}
+			>
+				<GhostHead>
+					<GhostEyes ref={eyeRef} customColor={colorProps.eye} />
+					<GhostMouth ref={mouthRef} customColor={colorProps.mouth} />
+				</GhostHead>
+				<GhostTail customColor={colorProps.cloth}>
+					<GhostRip />
+				</GhostTail>
+			</Ghost>
 
-				<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-					<defs>
-						<filter id="goo">
-							<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="ghost-blur" />
-							<feColorMatrix
-								in="ghost-blur"
-								mode="matrix"
-								values="
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="90">
+				<defs>
+					<filter id="goo">
+						<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="ghost-blur" />
+						<feColorMatrix
+							in="ghost-blur"
+							mode="matrix"
+							values="
 							1 0 0 0 0
 							0 1 0 0 0
 							0 0 1 0 0
 							0 0 0 16 -7"
-								result="ghost-gooey"
-							/>
-						</filter>
-					</defs>
-				</svg>
-			</div>
+							result="ghost-gooey"
+						/>
+					</filter>
+				</defs>
+			</svg>
 		</Container>
 	);
 }

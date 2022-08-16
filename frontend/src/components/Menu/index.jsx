@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import Link from 'components/Link';
 import IconLink from 'components/IconLink';
 import { Navbar, Logo, ToggleButton, Links, Dropdown, DropdownContent, LoginLink } from './styles';
-import PropTypes from 'prop-types';
 import useDarkMode from 'hooks/useDarkMode';
 import Avatar from '@mui/material/Avatar';
 import AdminIcon from '@mui/icons-material/AdminPanelSettings';
@@ -15,8 +14,8 @@ import useMobile from 'hooks/useMobile';
 import { stringToColor } from 'utils';
 import { AuthContext } from 'contexts/AuthContext';
 
-const Menu = ({ toggleDarkMode }) => {
-	const [isDarkMode] = useDarkMode();
+const Menu = () => {
+	const [isDarkMode, toggleDarkMode] = useDarkMode();
 	const [isMobile] = useMobile({ maxWidth: 770 });
 	const { currentUser, isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 	const permissions = usePermissions();
@@ -91,10 +90,6 @@ const Menu = ({ toggleDarkMode }) => {
 			<Hamburger toggled={hamburgerOpen} toggle={toggleHamburger} size={20} />
 		</Navbar>
 	);
-};
-
-Menu.propTypes = {
-	toggleDarkMode: PropTypes.func.isRequired
 };
 
 export default Menu;

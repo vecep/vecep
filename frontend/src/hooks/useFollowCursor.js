@@ -67,7 +67,6 @@ const useFollowCursor = (sideAnimations) => {
 		if (elementRef.current) {
 			elementRef.current.style.transform = `
 				translate(${_position.x}px, ${_position.y}px)
-				scale(.7)
 				skew(${_animationProps.skewX}deg)
 				rotate(${-_animationProps.skewX}deg)
 				scaleY(${_animationProps.scaleY})

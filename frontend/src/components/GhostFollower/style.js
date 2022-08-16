@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
+	display: inline-block;
+	margin-inline: 20px;
 `;
 
 export const Ghost = styled.div`
@@ -11,7 +10,17 @@ export const Ghost = styled.div`
 	z-index: 1;
 	transform-origin: center;
 	width: 90px;
-	margin: 20px 0 0 -45px;
+
+	${(props) =>
+		props.isMoving
+			? css`
+					top: 0;
+					left: 0;
+			  `
+			: css`
+					margin-top: 45px;
+					cursor: pointer;
+			  `}
 `;
 
 export const GhostHead = styled.div`

@@ -1,12 +1,11 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme } from 'styles/theme.js';
-import GlobalStyles from 'styles/globalStyles.js';
+import styled from 'styled-components';
 import Menu from 'components/Menu';
 import Content from 'components/Content';
 import { BrowserRouter as Router } from 'react-router-dom';
-import useDarkMode from 'hooks/useDarkMode';
 import AuthProvider from 'contexts/AuthContext';
+import ThemeProvider from 'contexts/ThemeContext';
+import ThemeWrapper from 'contexts/ThemeWrapper';
 import 'katex/dist/katex.min.css';
 
 const Container = styled.div`
@@ -17,19 +16,18 @@ const Container = styled.div`
 `;
 
 const App = () => {
-	const [isDarkMode, toggleDarkMode] = useDarkMode();
-
 	return (
-		<ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-			<GlobalStyles />
-			<AuthProvider>
-				<Router>
-					<Container>
-						<Menu toggleDarkMode={toggleDarkMode} />
-						<Content />
-					</Container>
-				</Router>
-			</AuthProvider>
+		<ThemeProvider>
+			<ThemeWrapper>
+				<AuthProvider>
+					<Router>
+						<Container>
+							<Menu />
+							<Content />
+						</Container>
+					</Router>
+				</AuthProvider>
+			</ThemeWrapper>
 		</ThemeProvider>
 	);
 };
