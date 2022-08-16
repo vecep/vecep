@@ -5,6 +5,7 @@ import Management from 'views/Management';
 import Configurations from 'views/Configurations';
 import Exams from 'views/Exams';
 import Exercises from 'views/Exercises';
+import Subjects from 'views/Subjects';
 import Home from 'views/Home';
 import Login from 'views/Login';
 import NotFound from 'views/NotFound';
@@ -25,6 +26,7 @@ const Content = () => {
 				<Route exact path="/" element={<Navigate to="/home" />} />
 				<Route exact path="/home" element={<Home />} />
 				<Route path="/exercicios" element={<Exercises />} />
+				<Route path="/materias" element={<Subjects />} />
 				<Route path="/provas" element={<Exams />} />
 				<Route path="/simulado" element={<Practice />} />
 				<Route path="/resultados" element={<Results />} />

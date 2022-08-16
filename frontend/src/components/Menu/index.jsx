@@ -44,7 +44,7 @@ const Menu = ({ toggleDarkMode }) => {
 
 			<Links open={hamburgerOpen} animate={!isMobile}>
 				<ToggleButton onClick={toggleDarkMode}>{isDarkMode ? `🌛` : `🌞`}</ToggleButton>
-				<Link to="/exercicios">Exercícios</Link>
+				<Link to="/materias">Matérias</Link>
 				<Link to="/provas">Provas</Link>
 				{isLoggedIn && <Link to="/resultados">Resultados</Link>}
 

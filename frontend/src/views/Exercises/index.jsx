@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Subject, NotFoundMessage } from './styles';
-import Link from 'components/Link';
 import Header from 'components/Header';
-import * as subjectApi from 'services/subject';
 import * as exerciseApi from 'services/exercise';
 import { handleError } from 'utils';
-import { useLocation, useSearchParams, useNavigate } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import Card from 'components/Card';
-import { Button } from '@mui/material';
+import { Container, Grid } from '@mui/material';
+import EmptyMessage from 'components/EmptyMessage';
 
 const Exercises = () => {
-	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
 
-	const [subjects, setSubjects] = useState([]);
 	const [exercises, setExercises] = useState(null);
 	const location = useLocation();
 
-	useEffect(() => {
-		subjectApi.list().then(setSubjects).catch(handleError);
-	}, []);
-
+	// TODO: implement React Query lib to data fetching and a fallback component for loading
 	useEffect(() => {
 		searchParams.get('subject') &&
 			exerciseApi
@@ -29,32 +22,28 @@ const Exercises = () => {
 				.catch(handleError);
 	}, [location]);
 
-	const renderSubjectsGrid = () =>
-		subjects.sort().map(({ _id, title }) => (
-			<Subject key={_id}>
-				<Link to={`?subject=${title}`}>{title}</Link>
-			</Subject>
-		));
-
 	const renderExercises = () =>
 		exercises?.length > 0 ? (
-			exercises.map((exercise) => <Card key={exercise._id} exercise={exercise} />)
+			<Grid container spacing={10}>
+				{exercises.map((exercise) => (
+					<Grid item xs={12} key={exercise._id}>
+						<Card exercise={exercise} />
+					</Grid>
+				))}
+			</Grid>
 		) : (
-			<NotFoundMessage>
-				<p>Nenhum exercício encontrado :/</p>
-				<Button variant="outlined" onClick={() => navigate(-1)}>
-					Voltar
-				</Button>
-			</NotFoundMessage>
+			<EmptyMessage
+				title="Nenhum exercício encontrado"
+				contact
+				description="Isso pode significar nenhum exercício cadastrado, ou algum erro."
+			/>
 		);
 
 	return (
-		<>
+		<Container>
 			<Header pageTitle="Exercícios" paths={['subject']} />
-			<Container>
-				{searchParams.get('subject') ? renderExercises() : renderSubjectsGrid()}
-			</Container>
-		</>
+			{renderExercises()}
+		</Container>
 	);
 };
 

@@ -1,17 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.ul`
-	display: flex;
-	gap: 1.5em;
-	flex-wrap: wrap;
-	width: 100%;
-	padding: 0;
-
-	> * {
-		flex: 1 1 15em;
-	}
-`;
-
 export const Subject = styled.li`
 	height: 13em;
 	background-color: ${({ theme }) => theme.body_reverse};
@@ -37,11 +25,5 @@ export const Subject = styled.li`
 	:hover {
 		transform: translate(0, -10px);
 		cursor: pointer;
-	}
-`;
-
-export const NotFoundMessage = styled.div`
-	> p {
-		margin-bottom: 1em;
 	}
 `;

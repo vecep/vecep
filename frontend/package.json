@@ -15,6 +15,7 @@
     "formik": "^2.2.9",
     "hamburger-react": "^2.4.1",
     "katex": "^0.16.0",
+    "lodash": "^4.17.21",
     "mhchemparser": "^4.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -32,7 +33,7 @@
     "test": "jest --config jest.config.json --no-cache",
     "test:noWatch": "npm run test -- --watchAll=false",
     "test:coverage": "npm run test:noWatch -- --coverage --testResultsProcessor jest-sonar-reporter",
-    "lint:report": "eslint src/ -f json -o reports/eslint-report.json" ,
+    "lint:report": "eslint src/ -f json -o reports/eslint-report.json",
     "sonar:scan": "npm run test:coverage && npm run lint:report && node run-sonar.js"
   },
   "browserslist": {
