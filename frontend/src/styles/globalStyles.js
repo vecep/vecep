@@ -12,6 +12,20 @@ export default createGlobalStyle`
 		color: ${({ theme }) => theme.text};
 	}
 	h1 {
-		color: ${({ theme }) => theme.titles};        
+		color: ${({ theme }) => theme.titles};
+	}
+
+	// ant design globals
+	.ant-image-preview-operations {
+		justify-content: center;
+		bottom: 0;
+		top: unset !important;
+		background: ${({ theme }) => theme.body};
+		color: ${({ theme }) => theme.titles};
+	}
+	.ant-image-mask-info {
+		&, * {
+			color: unset;
+		}
 	}
 `;

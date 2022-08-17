@@ -7,6 +7,7 @@ import AuthProvider from 'contexts/AuthContext';
 import ThemeProvider from 'contexts/ThemeContext';
 import ThemeWrapper from 'contexts/ThemeWrapper';
 import 'katex/dist/katex.min.css';
+import 'antd/dist/antd.min.css';
 
 const Container = styled.div`
 	display: flex;
