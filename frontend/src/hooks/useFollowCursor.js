@@ -22,8 +22,12 @@ const useFollowCursor = (sideAnimations) => {
 		return () => cancelAnimationFrame(requestRef.current);
 	}, []);
 
-	useEffect(() => (mouseRef.current.mousePosition = mousePosition), [mousePosition]);
-	useEffect(() => (mouseRef.current.mouseClicked = mouseClicked), [mouseClicked]);
+	useEffect(() => {
+		mouseRef.current.mousePosition = mousePosition;
+	}, [mousePosition]);
+	useEffect(() => {
+		mouseRef.current.mouseClicked = mouseClicked;
+	}, [mouseClicked]);
 
 	const render = () => {
 		requestRef.current = requestAnimationFrame(render);

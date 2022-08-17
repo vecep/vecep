@@ -22,14 +22,12 @@ function EmptyMessage({
 			</Title>
 			<Message>
 				<span>{description}</span>
-				<span>
-					{contact && (
-						<p>
-							Você pode entrar em contato conosco em:{' '}
-							<a href="mailto:vecep.fuvest@gmail.com">vecep.fuvest@gmail.com</a>
-						</p>
-					)}
-				</span>
+				{contact && (
+					<p>
+						Você pode entrar em contato conosco em:{' '}
+						<a href="mailto:vecep.fuvest@gmail.com">vecep.fuvest@gmail.com</a>
+					</p>
+				)}
 			</Message>
 
 			{!hideBackButton && (
