@@ -101,6 +101,8 @@ export const AnswerFeedback = styled.div`
 	background-color: ${(props) => (props.isCorrect ? 'lightgreen' : '#a0232d52')};
 `;
 
-export const CustomChip = MStyled(Chip)`
+export const CustomChip = MStyled(Chip, {
+	shouldForwardProp: (prop) => prop !== 'customColor'
+})`
 	background-color: ${(props) => props.customColor};
 `;

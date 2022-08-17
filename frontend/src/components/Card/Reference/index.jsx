@@ -21,9 +21,7 @@ const Reference = ({ reference, position }) => {
 				<S.Text>Referência {position}</S.Text>
 			</AccordionSummary>
 			<AccordionDetails>
-				<S.Text>
-					<Latext>{reference.text}</Latext>
-				</S.Text>
+				<S.Text>{reference.text && <Latext>{reference.text}</Latext>}</S.Text>
 				{reference.image && (
 					<S.ImageContainer isMobile={isMobile}>
 						<CloudImage cloudId={reference.image.cloudId} alt={reference.image.description} />
@@ -38,7 +36,7 @@ const Reference = ({ reference, position }) => {
 };
 
 Reference.defaultProps = {
-	index: null
+	position: null
 };
 
 Reference.propTypes = {

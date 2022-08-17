@@ -9,7 +9,7 @@ export const Title = styled.p`
 	margin-bottom: 0.5em;
 `;
 
-export const Message = styled.p`
+export const Message = styled.div`
 	margin-bottom: 1.5em;
 	opacity: 0.9;
 `;

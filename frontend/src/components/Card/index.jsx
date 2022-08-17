@@ -58,7 +58,11 @@ const Card = ({ exercise }) => {
 		));
 	const renderReferences = () =>
 		exercise.references.map((r, index) => (
-			<Reference key={r._id} reference={r} position={exercise.references.length > 1 && index + 1} />
+			<Reference
+				key={r._id}
+				reference={r}
+				position={exercise.references.length > 1 ? index + 1 : null}
+			/>
 		));
 
 	const renderFooter = () => {
