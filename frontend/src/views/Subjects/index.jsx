@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Subject } from './styles';
 import Link from 'components/Link';
 import Header from 'components/Header';
 import * as subjectApi from 'services/subject';
-import { handleError } from 'utils';
 import { Container, Grid } from '@mui/material';
-import EmptyMessage from 'components/EmptyMessage';
+import { useQuery } from '@tanstack/react-query';
+import AsyncLoader from 'components/AsyncLoader';
 
 const Subjects = () => {
-	const [subjects, setSubjects] = useState([]);
-
-	useEffect(() => {
-		subjectApi.list().then(setSubjects).catch(handleError);
-	}, []);
+	const queryKey = ['subjects'];
+	const queryFn = () => subjectApi.list();
+	const { data: subjects } = useQuery(queryKey, queryFn, {
+		refetchOnWindowFocus: false
+	});
 
 	return (
 		<Container>
 			<Header pageTitle="Matérias" />
-			{subjects.length ? (
+
+			<AsyncLoader queryKey={queryKey} queryFn={queryFn}>
 				<Grid container spacing={3}>
-					{subjects.sort().map(
+					{subjects?.sort?.()?.map?.(
 						// TODO: move sorting to backend
 						({ _id, title }) => (
 							<Grid item xs={3} key={_id}>
@@ -30,13 +31,7 @@ const Subjects = () => {
 						)
 					)}
 				</Grid>
-			) : (
-				<EmptyMessage
-					title="Nenhuma matéria encontrada"
-					contact
-					description="Isso pode significar nenhum exercício cadastrado, ou algum erro."
-				/>
-			)}
+			</AsyncLoader>
 		</Container>
 	);
 };
