@@ -12,7 +12,7 @@ export default createGlobalStyle`
 		color: ${({ theme }) => theme.text};
 	}
 	h1 {
-		color: ${({ theme }) => theme.titles};
+		color: ${({ theme }) => theme.text};
 	}
 
 	// ant design globals
@@ -21,7 +21,7 @@ export default createGlobalStyle`
 		bottom: 0;
 		top: unset !important;
 		background: ${({ theme }) => theme.body};
-		color: ${({ theme }) => theme.titles};
+		color: ${({ theme }) => theme.text};
 	}
 	.ant-image-mask-info {
 		&, * {
