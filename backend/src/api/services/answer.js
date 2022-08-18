@@ -1,9 +1,9 @@
 import Answer from '../models/Answer.js';
 
-const create = ({ userId, answerId, exerciseId, isCorrect }) =>
-	Answer.create({ userId, answerId, exerciseId, isCorrect });
+const create = ({ userId, answerPosition, exerciseId, isCorrect }) =>
+	Answer.create({ userId, answerPosition, exerciseId, isCorrect });
 
-const list = ({ userId, filters = {} } = {}) => Answer.find({ userId, filters });
+const list = ({ filters = {} } = {}) => Answer.find(filters);
 
 const show = ({ queryParameters, filters }) => Answer.finOne(queryParameters, filters);
 

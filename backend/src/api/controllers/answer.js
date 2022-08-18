@@ -5,7 +5,7 @@ const create = async (req, res, next) => {
 		const { userId } = req;
 		res.content = await service.create({
 			userId,
-			answerId: req.body.answerId,
+			answerPosition: req.body.answerPosition,
 			exerciseId: req.body.exerciseId,
 			isCorrect: req.body.isCorrect
 		});
@@ -19,7 +19,7 @@ const create = async (req, res, next) => {
 const list = async (req, res, next) => {
 	try {
 		const { userId } = req;
-		res.content = await service.list({ userId, filters: req.query });
+		res.content = await service.list({ filters: { userId, ...req.query } });
 		res.message = 'Answers fetched successfully';
 		next();
 	} catch (err) {
@@ -63,7 +63,7 @@ const destroyAll = async (req, res, next) => {
 	try {
 		const { userId } = req;
 		res.content = await service.destroyAll({ userId });
-		res.message = 'Answer deleted successfully';
+		res.message = 'All answers deleted successfully';
 		next();
 	} catch (err) {
 		next(err);

@@ -10,18 +10,18 @@ export default (err, req, res, next) => {
 			return reduced;
 		}, {});
 
-		responseFactory(res, {
+		return responseFactory(res, {
 			message: errorMessages,
 			status: httpResponseCodes.INTERNAL_SERVER_ERROR
 		}).send();
 	}
 	if (err instanceof UserFacingError)
-		responseFactory(res, {
+		return responseFactory(res, {
 			status: err.statusCode,
 			message: err.message
 		}).send();
 
-	responseFactory(res, {
+	return responseFactory(res, {
 		status: httpResponseCodes.INTERNAL_SERVER_ERROR,
 		message: 'Internal Server Error',
 		content: process.env.NODE_ENV === 'dev' ? err.stack : undefined

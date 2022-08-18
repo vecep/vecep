@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import * as S from './styles';
 import PropTypes from 'prop-types';
 import * as answerApi from 'services/answer';
@@ -9,6 +9,7 @@ import { isEmpty } from 'lodash';
 import useMobile from 'hooks/useMobile';
 import { AuthContext } from 'contexts/AuthContext';
 import Latext from 'components/Latext';
+import { useQuery } from '@tanstack/react-query';
 
 const Card = ({ exercise }) => {
 	const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -17,28 +18,27 @@ const Card = ({ exercise }) => {
 	const [isMobile] = useMobile();
 	const { isLoggedIn } = useContext(AuthContext);
 
-	useEffect(() => {
-		isLoggedIn &&
-			answerApi
-				.list({ exerciseId: exercise._id })
-				.then((response) => {
-					const [fetchedAnswer] = response;
-
-					if (fetchedAnswer) {
-						setSelectedAnswer(fetchedAnswer.answerId);
-						setAnswered(true);
-						setIsCorrect(fetchedAnswer.isCorrect);
-					}
-				})
-				.catch(handleError);
-	}, []);
+	const queryKey = ['answers', exercise._id];
+	const queryFn = (context) => {
+		return answerApi.list({ exerciseId: context.queryKey[1] });
+	};
+	useQuery(queryKey, queryFn, {
+		refetchOnWindowFocus: false,
+		initialData: null,
+		enabled: isLoggedIn,
+		onSuccess: ([data]) => {
+			setSelectedAnswer(data?.answerPosition);
+			setAnswered(!!data);
+			setIsCorrect(data?.isCorrect);
+		}
+	});
 
 	const handleChangeAnswer = (e) => {
-		setSelectedAnswer(e.target.value);
+		setSelectedAnswer(parseInt(e.target.value));
 	};
 
 	const handleSubmit = () => {
-		const selectedAnswerObj = exercise.options.find((o) => o._id === selectedAnswer);
+		const selectedAnswerObj = exercise.options.find((o) => o.position == selectedAnswer);
 		setAnswered(true);
 		setIsCorrect(selectedAnswerObj.isCorrect);
 
@@ -46,7 +46,7 @@ const Card = ({ exercise }) => {
 			answerApi
 				.post({
 					exerciseId: exercise._id,
-					answerId: selectedAnswerObj._id,
+					answerPosition: selectedAnswerObj.position,
 					isCorrect: selectedAnswerObj.isCorrect
 				})
 				.catch(handleError);

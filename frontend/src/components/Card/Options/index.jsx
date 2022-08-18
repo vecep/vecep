@@ -20,7 +20,7 @@ const Options = ({ options, selectedAnswer, handleChange, answered, readOnly }) 
 					<S.OptionsContainer key={o._id}>
 						<FormControlLabel
 							key={o._id}
-							value={o._id}
+							value={o.position.toString()}
 							control={<S.Option />}
 							label={
 								o.image ? (
@@ -41,7 +41,7 @@ const Options = ({ options, selectedAnswer, handleChange, answered, readOnly }) 
 	return (
 		<FormControl>
 			<RadioGroup
-				// needs label
+				// TODO: needs label for accessibility
 				name="option-buttons-group"
 				value={selectedAnswer}
 				onChange={handleChange}
@@ -60,7 +60,7 @@ Options.defaultProps = {
 
 Options.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-	selectedAnswer: PropTypes.string,
+	selectedAnswer: PropTypes.number,
 	handleChange: PropTypes.func.isRequired,
 	answered: PropTypes.bool,
 	readOnly: PropTypes.bool

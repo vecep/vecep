@@ -1,9 +1,18 @@
 import mongoose from 'mongoose';
 
 const AnswerSchema = new mongoose.Schema({
-	userId: mongoose.Types.ObjectId,
-	exerciseId: mongoose.Types.ObjectId,
-	answerId: mongoose.Types.ObjectId,
+	userId: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true
+	},
+	exerciseId: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true
+	},
+	answerPosition: {
+		type: Number,
+		required: true
+	},
 	isCorrect: {
 		type: Boolean,
 		required: true

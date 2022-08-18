@@ -8,26 +8,31 @@ export default [
 		options: [
 			{
 				text: 'a temperatura do café é suficiente para liquefazer a sacarose do algodão‐doce, fazendo com que este goteje na forma de sacarose líquida.',
+				position: 1,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'o vapor de água que sai do café quente irá condensar na superfície do algodão‐doce, gotejando na forma de água pura.',
+				position: 2,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'a sacarose que evapora do café quente condensa na superfície do algodão‐doce e goteja na forma de uma solução de sacarose em água.',
+				position: 3,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'o vapor de água encontra o algodão‐doce e solubiliza a sacarose, que goteja na forma de uma solução de sacarose em água.',
+				position: 4,
 				isCorrect: true,
 				image: null
 			},
 			{
 				text: 'o vapor de água encontra o algodão‐doce e vaporiza a sacarose, que goteja na forma de uma solução de sacarose em água.',
+				position: 5,
 				isCorrect: false,
 				image: null
 			}
@@ -48,11 +53,11 @@ export default [
 		subject: 'Química',
 		topics: ['Termodinâmica'],
 		options: [
-			{ text: '0,04%.', isCorrect: false, image: null },
-			{ text: '0,062%.', isCorrect: false, image: null },
-			{ text: '4,6%.', isCorrect: false, image: null },
-			{ text: '40%.', isCorrect: false, image: null },
-			{ text: '62%.', isCorrect: true, image: null }
+			{ text: '0,04%.', position: 1, isCorrect: false, image: null },
+			{ text: '0,062%.', position: 2, isCorrect: false, image: null },
+			{ text: '4,6%.', position: 3, isCorrect: false, image: null },
+			{ text: '40%.', position: 4, isCorrect: false, image: null },
+			{ text: '62%.', position: 5, isCorrect: true, image: null }
 		],
 		references: []
 	},
@@ -64,26 +69,31 @@ export default [
 		options: [
 			{
 				text: 'o $\\ce{Cs}$ é um elemento químico radioativo e, devido a essa característica química, a molécula de $\\ce{NaCs}$ não se formaria sem esse modo inovador $\\ce{(L.2)}$, que estabiliza o decaimento.',
+				position: 1,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'o raio atômico do $\\ce{Na}$ é maior que o do $\\ce{Cs}$, portanto, a sua energia de ionização também é maior. O esbarrão $\\ce{L.3}$ entre os átomos retira um elétron do $\\ce{Na}$, permitindo a ligação.',
+				position: 2,
 				isCorrect: true,
 				image: null
 			},
 			{
 				text: 'o terceiro laser $\\ce{L.8}$ usado no experimento serviu para retirar um nêutron do $\\ce{Cs}$, tornando‐o um cátion e possibilitando a reação com o $\\ce{Na}$.',
+				position: 3,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'na natureza, com esses elementos se esbarrando por acaso $\\ce{(L.10‐11)}$, a tendência seria formar $\\ce{CsNa}$, e não $\\ce{NaCs}$, justificando o caráter inovador do experimento.',
+				position: 4,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'o $\\ce{Cs}$ e o $\\ce{Na}$ não formariam uma molécula espontaneamente $\\ce{(L.11-12)}$, uma vez que ambos têm grande tendência a formarem cátions e ligações iônicas.',
+				position: 5,
 				isCorrect: true,
 				image: null
 			}
@@ -106,26 +116,31 @@ export default [
 		options: [
 			{
 				text: 'fica mais quente do que a aquosa, degradando a betanina; o mesmo não é observado com o licopeno, devido à sua cadeia carbônica longa.',
+				position: 1,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'está mais exposta ao ar, que oxida a betanina; o mesmo não é observado com o licopeno, devido à grande quantidade de duplas ligações.',
+				position: 2,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'é apolar e a betanina, polar, havendo pouca interação; o mesmo não é observado com o licopeno, que é apolar e irá interagir com o azeite.',
+				position: 3,
 				isCorrect: true,
 				image: null
 			},
 			{
 				text: 'é apolar e a aquosa, polar, mantendo‐se separadas; o licopeno age como um surfactante misturando as fases, colorindo a oleosa, enquanto a betanina não.',
+				position: 4,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'tem alta viscosidade, facilitando a difusão do licopeno, composto de menor massa molar; o mesmo não é observado para a betanina, com maior massa.',
+				position: 5,
 				isCorrect: false,
 				image: null
 			}
@@ -143,26 +158,31 @@ export default [
 		options: [
 			{
 				text: '$\\ce{limoneno\\rightleftharpoons p‐cimeno -> \\alpha‐terpineno}$',
+				position: 1,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: '$\\ce{limoneno ->[{p-cimeno (catalisador)}] \\alpha‐terpineno}$',
+				position: 2,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: '$\\ce{limoneno + p‐cimeno\\rightleftharpoons \\alpha‐terpineno}$',
+				position: 3,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: '$\\ce{limoneno ->[{\\alpha‐terpineno (catalisador)}] p-cimeno}$',
+				position: 4,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: '$\\ce{limoneno -> \\alpha‐terpineno -> p‐cimeno}$',
+				position: 5,
 				isCorrect: true,
 				image: null
 			}
@@ -178,11 +198,11 @@ export default [
 		subject: 'Química',
 		topics: ['Concentração de soluções. Diluição e mistura de soluções. Titulação.'],
 		options: [
-			{ text: '12ª diluição $(12CH)$.', isCorrect: true, image: null },
-			{ text: '24ª diluição $(24CH)$.', isCorrect: false, image: null },
-			{ text: '51ª diluição $(51CH)$.', isCorrect: false, image: null },
-			{ text: '99ª diluição $(99CH)$.', isCorrect: false, image: null },
-			{ text: '200ª diluição $(200CH)$.', isCorrect: false, image: null }
+			{ text: '12ª diluição $(12CH)$.', position: 1, isCorrect: true, image: null },
+			{ text: '24ª diluição $(24CH)$.', position: 2, isCorrect: false, image: null },
+			{ text: '51ª diluição $(51CH)$.', position: 3, isCorrect: false, image: null },
+			{ text: '99ª diluição $(99CH)$.', position: 4, isCorrect: false, image: null },
+			{ text: '200ª diluição $(200CH)$.', position: 5, isCorrect: false, image: null }
 		],
 		references: [
 			{ text: '', author: null, source: null, image: { description: '', cloudId: 'mock_5' } }
@@ -197,26 +217,31 @@ export default [
 		options: [
 			{
 				text: 'O decaimento de um átomo de $238U$ produz, ao final da série de decaimento, apenas um átomo de $He$.',
+				position: 1,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'O decaimento do $238U$ para $234U$ gera a mesma quantidade de $He$ que o decaimento do $234U$ para $230Th$.',
+				position: 2,
 				isCorrect: true,
 				image: null
 			},
 			{
 				text: 'Daqui a 4,5 bilhões de anos, a quantidade de $He$ no planeta Terra será o dobro da atual.',
+				position: 3,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'O decaimento do $238U$ para $234U$ gera a mesma quantidade de $He$ que o decaimento do $214Pb$ para $214Po$.',
+				position: 4,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'A produção de $He$ ocorre pela sequência de decaimento a partir do $206Pb$.',
+				position: 5,
 				isCorrect: false,
 				image: null
 			}
@@ -232,11 +257,36 @@ export default [
 		subject: 'Química',
 		topics: ['Cinética química'],
 		options: [
-			{ text: null, isCorrect: false, image: { description: '', cloudId: 'opt_mock_1' } },
-			{ text: null, isCorrect: false, image: { description: '', cloudId: 'opt_mock_2' } },
-			{ text: null, isCorrect: true, image: { description: '', cloudId: 'opt_mock_3' } },
-			{ text: null, isCorrect: false, image: { description: '', cloudId: 'opt_mock_4' } },
-			{ text: null, isCorrect: false, image: { description: '', cloudId: 'opt_mock_5' } }
+			{
+				text: null,
+				position: 1,
+				isCorrect: false,
+				image: { description: '', cloudId: 'opt_mock_1' }
+			},
+			{
+				text: null,
+				position: 2,
+				isCorrect: false,
+				image: { description: '', cloudId: 'opt_mock_2' }
+			},
+			{
+				text: null,
+				position: 3,
+				isCorrect: true,
+				image: { description: '', cloudId: 'opt_mock_3' }
+			},
+			{
+				text: null,
+				position: 4,
+				isCorrect: false,
+				image: { description: '', cloudId: 'opt_mock_4' }
+			},
+			{
+				text: null,
+				position: 5,
+				isCorrect: false,
+				image: { description: '', cloudId: 'opt_mock_5' }
+			}
 		],
 		references: []
 	},
@@ -249,26 +299,31 @@ export default [
 		options: [
 			{
 				text: 'A conversão da biliverdina em bilirrubina ocorre por meio de uma redução.',
+				position: 1,
 				isCorrect: true,
 				image: null
 			},
 			{
 				text: 'A biliverdina, assim como a hemoglobina, é capaz de transportar $O2$ para as células do corpo, pois há oxigênio ligado na molécula.',
+				position: 2,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'As três estruturas apresentadas contêm o grupo funcional amida.',
+				position: 3,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'A degradação do grupo heme para a formação da biliverdina produz duas cetonas.',
+				position: 4,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'O grupo heme, a biliverdina e a bilirrubina são isômeros.',
+				position: 5,
 				isCorrect: false,
 				image: null
 			}
@@ -286,26 +341,31 @@ export default [
 		options: [
 			{
 				text: 'A sublimação da água ocorria devido às baixas temperaturas e à alta pressão atmosférica nas montanhas.',
+				position: 1,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'Os alimentos, após congelados naturalmente nos períodos frios, eram levados para a parte mais baixa das montanhas, onde a pressão atmosférica era menor, o que possibilitava a sublimação.',
+				position: 2,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'Os alimentos eram expostos ao sol para aumentar a temperatura, e a baixa pressão atmosférica local favorecia a solidificação.',
+				position: 3,
 				isCorrect: false,
 				image: null
 			},
 			{
 				text: 'As temperaturas eram baixas o suficiente nos períodos frios para congelar os alimentos, e a baixa pressão atmosférica nas altas montanhas possibilitava a sublimação.',
+				position: 4,
 				isCorrect: true,
 				image: null
 			},
 			{
 				text: 'Os alimentos, após congelados naturalmente, eram prensados para aumentar a pressão, de forma que a sublimação ocorresse.',
+				position: 5,
 				isCorrect: false,
 				image: null
 			}
@@ -321,11 +381,11 @@ export default [
 		subject: 'Química',
 		topics: ['Funções Inorgânicas (ácidos, bases, sais, óxidos).'],
 		options: [
-			{ text: '$\\frac{1}{12}$', isCorrect: false, image: null },
-			{ text: '$\\frac{1}{6}$', isCorrect: false, image: null },
-			{ text: '$\\frac{1}{4}$', isCorrect: true, image: null },
-			{ text: '$\\frac{11}{36}$', isCorrect: false, image: null },
-			{ text: '$\\frac{5}{12}$', isCorrect: false, image: null }
+			{ text: '$\\frac{1}{12}$', position: 1, isCorrect: false, image: null },
+			{ text: '$\\frac{1}{6}$', position: 2, isCorrect: false, image: null },
+			{ text: '$\\frac{1}{4}$', position: 3, isCorrect: true, image: null },
+			{ text: '$\\frac{11}{36}$', position: 4, isCorrect: false, image: null },
+			{ text: '$\\frac{5}{12}$', position: 5, isCorrect: false, image: null }
 		],
 		references: [
 			{ text: '', author: null, source: null, image: { description: '', cloudId: 'mock_8' } }
