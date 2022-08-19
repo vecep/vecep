@@ -1,8 +1,10 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 
-jest.mock('cloudinary-react', () => ({
-	Image: ({ alt }) => <img alt={alt}></img>
+jest.mock('@cloudinary/url-gen', () => ({
+	Cloudinary: () => ({
+		image: () => ({
+			toURL: () => 'https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg'
+		})
+	})
 }));

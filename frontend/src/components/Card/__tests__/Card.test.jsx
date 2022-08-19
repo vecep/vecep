@@ -2,16 +2,23 @@
  * @jest-environment jsdom
  */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Card from '..';
 import exerciseMock from '../__mocks__/exercise';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const user = userEvent.setup();
 
 const renderComponent = ({ exercise = {} } = {}) => {
-	render(<Card exercise={{ ...exerciseMock, ...exercise }} />);
+	render(
+		<QueryClientProvider client={queryClient}>
+			<Card exercise={{ ...exerciseMock, ...exercise }} />
+		</QueryClientProvider>
+	);
 };
 
 describe('Card Display', () => {
@@ -82,8 +89,9 @@ describe('Reference Display', () => {
 
 		await user.click(referenceAccordion);
 		await user.click(referenceAccordion);
-
-		expect(screen.queryByAltText('Imagem de fração')).not.toBeVisible();
+		await waitFor(() => {
+			expect(screen.queryByAltText('Imagem de fração')).not.toBeVisible();
+		});
 	});
 
 	describe('Unhappy path', () => {

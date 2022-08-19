@@ -10,6 +10,7 @@ export default {
 	options: [
 		{
 			text: '11',
+			position: 1,
 			isCorrect: false,
 			image: {
 				description: 'Imagem do James',
@@ -20,24 +21,28 @@ export default {
 		},
 		{
 			text: 'o raio atômico do $\\ce{Na}$ é maior que o do $\\ce{Cs}$, portanto, a sua energia de ionização também é maior. O esbarrão $\\ce{L.3}$ entre os átomos retira um elétron do $\\ce{Na}$, permitindo a ligação.',
+			position: 2,
 			isCorrect: false,
 			image: null,
 			_id: '61d6fb156f1f6dd697310023'
 		},
 		{
 			text: '1',
+			position: 3,
 			isCorrect: false,
 			image: null,
 			_id: '61d6fb156f1f6dd697310024'
 		},
 		{
 			text: '2',
+			position: 4,
 			isCorrect: true,
 			image: null,
 			_id: '61d6fb156f1f6dd697310025'
 		},
 		{
 			text: '3',
+			position: 5,
 			isCorrect: false,
 			image: null,
 			_id: '61d6fb156f1f6dd697310026'
