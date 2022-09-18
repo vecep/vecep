@@ -11,13 +11,6 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-
-	${(props) =>
-		props.animateAnswer &&
-		css`
-			background-color: ${props.isCorrect ? 'lightgreen' : '#a0232d52'};
-			transition: background 1s;
-		`}
 `;
 
 export const FlexBox = styled.div`
@@ -98,7 +91,7 @@ export const AnswerFeedback = styled.div`
 	align-items: center;
 	justify-content: center;
 	display: flex;
-	background-color: ${(props) => (props.isCorrect ? 'lightgreen' : '#a0232d52')};
+	background: ${({ theme }) => theme.dimmed};
 `;
 
 export const CustomChip = MStyled(Chip, {

@@ -10,6 +10,8 @@ import useMobile from 'hooks/useMobile';
 import { AuthContext } from 'contexts/AuthContext';
 import Latext from 'components/Latext';
 import { useQuery } from '@tanstack/react-query';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 
 const Card = ({ exercise }) => {
 	const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -69,7 +71,17 @@ const Card = ({ exercise }) => {
 		if (answered)
 			return (
 				<S.AnswerFeedback isCorrect={isCorrect}>
-					{isCorrect ? 'Resposta correta' : 'Resposta incorreta'}
+					{isCorrect ? (
+						<>
+							{'Resposta correta'}
+							<CheckCircleRoundedIcon sx={{ fill: '#008000' }} />
+						</>
+					) : (
+						<>
+							{'Resposta incorreta'}
+							<CancelRoundedIcon sx={{ fill: '#FF0000' }} />
+						</>
+					)}
 				</S.AnswerFeedback>
 			);
 
