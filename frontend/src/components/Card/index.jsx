@@ -10,6 +10,7 @@ import useMobile from 'hooks/useMobile';
 import { AuthContext } from 'contexts/AuthContext';
 import Latext from 'components/Latext';
 import { useQuery } from '@tanstack/react-query';
+import Chip from 'components/Chip';
 
 const Card = ({ exercise }) => {
 	const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -54,8 +55,9 @@ const Card = ({ exercise }) => {
 
 	const renderTopics = () =>
 		exercise.topics.map((t) => (
-			<S.CustomChip key={t} label={t} customColor={() => stringToColor(t, '80')} />
+			<Chip key={t} label={t} customColor={() => stringToColor(t, '80')} />
 		));
+
 	const renderReferences = () =>
 		exercise.references.map((r, index) => (
 			<Reference

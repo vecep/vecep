@@ -13,6 +13,8 @@ import usePermissions from 'hooks/usePermissions';
 import useMobile from 'hooks/useMobile';
 import { stringToColor } from 'utils';
 import { AuthContext } from 'contexts/AuthContext';
+import LightModeIcon from '@mui/icons-material/WbSunny';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const Menu = () => {
 	const [isDarkMode, toggleDarkMode] = useDarkMode();
@@ -42,7 +44,9 @@ const Menu = () => {
 			</Logo>
 
 			<Links open={hamburgerOpen} animate={!isMobile}>
-				<ToggleButton onClick={toggleDarkMode}>{isDarkMode ? `🌛` : `🌞`}</ToggleButton>
+				<ToggleButton onClick={toggleDarkMode}>
+					{isDarkMode ? <DarkModeIcon fontSize="small" /> : <LightModeIcon fontSize="small" />}
+				</ToggleButton>
 				<Link to="/materias">Matérias</Link>
 				<Link to="/provas">Provas</Link>
 				{isLoggedIn && <Link to="/resultados">Resultados</Link>}

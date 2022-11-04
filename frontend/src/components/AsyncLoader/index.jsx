@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Button, Alert, AlertTitle } from '@mui/material';
 import ColorWrapper from 'components/ColorWrapper';
 import { useQuery } from '@tanstack/react-query';
-import { isNil } from 'lodash';
+import { isNil, isEmpty } from 'lodash';
 
 function AsyncLoader({ noData, fallbackComponent, children, queryKey, queryFn, emptyProps }) {
 	const { isLoading, error, refetch, data } = useQuery(queryKey, queryFn, {
@@ -38,7 +38,7 @@ function AsyncLoader({ noData, fallbackComponent, children, queryKey, queryFn, e
 				</ColorWrapper>
 			);
 
-		if (!isNil(noData) ? noData : !data?.length)
+		if (!isNil(noData) ? noData : isEmpty(data))
 			return <EmptyMessage title={emptyProps.title} contact description={emptyProps.description} />;
 
 		return children;
@@ -58,7 +58,7 @@ AsyncLoader.propTypes = {
 	children: PropTypes.node,
 	fallbackComponent: PropTypes.node,
 	noData: PropTypes.bool,
-	queryKey: PropTypes.arrayOf(PropTypes.string).isRequired,
+	queryKey: PropTypes.arrayOf(PropTypes.any).isRequired,
 	queryFn: PropTypes.func.isRequired,
 	emptyProps: PropTypes.shape({
 		title: PropTypes.string,

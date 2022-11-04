@@ -1,4 +1,4 @@
-import { Button, Chip } from '@mui/material';
+import { Button } from '@mui/material';
 import styled, { css, withTheme } from 'styled-components';
 import { styled as MStyled } from '@mui/system';
 
@@ -99,10 +99,4 @@ export const AnswerFeedback = styled.div`
 	justify-content: center;
 	display: flex;
 	background-color: ${(props) => (props.isCorrect ? 'lightgreen' : '#a0232d52')};
-`;
-
-export const CustomChip = MStyled(Chip, {
-	shouldForwardProp: (prop) => prop !== 'customColor'
-})`
-	background-color: ${(props) => props.customColor};
 `;

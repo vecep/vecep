@@ -9,6 +9,7 @@ import ThemeWrapper from 'contexts/ThemeWrapper';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'katex/dist/katex.min.css';
 import 'antd/dist/antd.min.css';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const Container = styled.div`
 	display: flex;
@@ -34,6 +35,7 @@ const App = () => {
 					</AuthProvider>
 				</ThemeWrapper>
 			</ThemeProvider>
+			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	);
 };
