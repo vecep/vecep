@@ -1,4 +1,5 @@
 import service from '../services/exercise.js';
+import flattenKeys from '../utils/flattenKeys.js';
 
 const create = async (req, res, next) => {
 	try {
@@ -12,7 +13,9 @@ const create = async (req, res, next) => {
 
 const list = async (req, res, next) => {
 	try {
-		res.content = await service.list({ filters: req.query });
+		res.content = await service.list({
+			filters: { ...flattenKeys(JSON.parse(req.query.filters)), userId: req.userId }
+		});
 		res.message = 'Exercises fetched successfully';
 		next();
 	} catch (err) {
@@ -52,10 +55,21 @@ const destroy = async (req, res, next) => {
 	}
 };
 
+const listFilterData = async (_req, res, next) => {
+	try {
+		res.content = await service.listFilterData();
+		res.message = 'Filter data fetched successfully';
+		next();
+	} catch (err) {
+		next(err);
+	}
+};
+
 export default {
 	create,
 	list,
 	show,
 	update,
-	destroy
+	destroy,
+	listFilterData
 };

@@ -15,11 +15,12 @@ router.get('/', (_req, res) => {
 });
 
 router.post('/api/exercise', [verifyToken, isAdmin], exerciseController.create);
-router.get('/api/exercises', exerciseController.list);
+router.get('/api/exercises', [verifyToken], exerciseController.list);
 router.get('/api/exercise/:id?', exerciseController.show);
 router.put('/api/exercise/:id', [verifyToken, isAdmin], exerciseController.update);
 router.patch('/api/exercise/:id', [verifyToken, isAdmin], exerciseController.update);
 router.delete('/api/exercise/:id', [verifyToken, isAdmin], exerciseController.destroy);
+router.get('/api/exercise/filter-data', exerciseController.listFilterData);
 
 router.post('/api/image', [verifyToken], imageController.create);
 router.get('/api/images', imageController.list);
